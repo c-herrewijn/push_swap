@@ -1,2 +1,5 @@
 push_swap
 *.o
+*.a
+visualizer/*
+*.ini
