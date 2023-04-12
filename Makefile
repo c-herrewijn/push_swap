@@ -30,13 +30,13 @@ fclean: clean
 re: fclean all
 
 test: test.out
-	./test.out
-	rm ./unit_tests/*.o
-	rm test.out
+	@./test.out
+	@rm ./unit_tests/*.o
+	@rm test.out
 
 TEST_SRCS = $(addprefix unit_tests/, run_tests.c test_isinteger.c)
 TEST_OBJS = $(TEST_SRCS:.c=.o)
 test.out: $(TEST_OBJS) $(LIBFT_DIR)/$(LIBFTNAME)
-	$(CC) $(FLAGS) sources/utils.c $^ -o test.out
+	@$(CC) $(FLAGS) sources/utils.c $^ -o test.out
 
 .PHONY: all clean fclean re test
