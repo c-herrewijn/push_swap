@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/12 15:42:08 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/12 16:06:21 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/12 17:18:31 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ bool	ft_isinteger(char *int_str)
 	i = 0;
 	sign = 1;
 	if (int_str[0] == '-')
-	{
 		sign = -1;
+	if (int_str[0] == '-' || int_str[0] == '+')
 		i++;
-	}
 	num = 0;
 	while (int_str[i] != '\0')
 	{

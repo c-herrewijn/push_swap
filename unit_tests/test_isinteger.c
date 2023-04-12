@@ -8,6 +8,7 @@ void test_isinteger(void)
 	// valid integers
 	assert(ft_isinteger("42") == true);
 	assert(ft_isinteger("-42") == true);
+	assert(ft_isinteger("+42") == true);
 	assert(ft_isinteger("0") == true);
 	assert(ft_isinteger("-0") == true);
 	assert(ft_isinteger("2512314") == true);
@@ -34,7 +35,6 @@ void test_isinteger(void)
 	assert(ft_isinteger("10A") == false);
 	assert(ft_isinteger(" 10") == false);
 	assert(ft_isinteger("1-0") == false);
-	assert(ft_isinteger("+4") == false);
 	assert(ft_isinteger("3.5") == false);
 	assert(ft_isinteger("-3.5") == false);
 	assert(ft_isinteger("9999999999") == false);  // larger then INT_MAX
