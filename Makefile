@@ -1,7 +1,7 @@
 NAME = push_swap
 FLAGS = -Wall -Werror -Wextra
 SRC_DIR = sources
-SRCS = main.c
+SRCS = main.c utils.c
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 LIBFT_DIR = libft
@@ -29,4 +29,14 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+test: test.out
+	./test.out
+	rm ./unit_tests/*.o
+	rm test.out
+
+TEST_SRCS = $(addprefix unit_tests/, run_tests.c test_isinteger.c)
+TEST_OBJS = $(TEST_SRCS:.c=.o)
+test.out: $(TEST_OBJS) $(LIBFT_DIR)/$(LIBFTNAME)
+	$(CC) $(FLAGS) sources/utils.c $^ -o test.out
+
+.PHONY: all clean fclean re test
