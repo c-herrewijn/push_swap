@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/13 17:01:40 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/13 20:03:06 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ typedef struct s_stack
 bool	ft_isinteger(char *int_str);
 t_stack	*stack_get_last(t_stack *stack);
 int		parse_input(int argc, char *argv[], t_stack **stack_a);
+void	normalize_input(t_stack *stack);
 
 #endif

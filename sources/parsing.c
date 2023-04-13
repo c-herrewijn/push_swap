@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/13 16:32:57 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/13 19:55:40 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/13 20:03:29 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	ft_isinteger(char *int_str)
 	return (num >= INT_MIN && num <= INT_MAX);
 }
 
-static void	normalize_input(t_stack *stack)
+void	normalize_input(t_stack *stack)
 {
 	t_stack	*i;
 	t_stack	*j;
