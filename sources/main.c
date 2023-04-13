@@ -46,6 +46,8 @@ int	main(int argc, char *argv[])
 	t_stack	*stack_a;  // points to the top of the stack
 	t_stack	*stack_b;  // points to the top of the stack
 
+	stack_a = NULL;
+	stack_b = NULL;
 	if (is_valid_input(argc, argv) == false)
 	{
 		write(STDERR_FILENO, "Error\n", 6);
@@ -59,7 +61,8 @@ int	main(int argc, char *argv[])
 
 	// todo: normalize input
 	// todo: sort algorithm
-	stack_b = NULL;
+
+
 	
 	// dummy out:
 	puts("pb");
