@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
+/*   parsing.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/04/12 15:42:08 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/12 17:18:31 by cherrewi      ########   odam.nl         */
+/*   Created: 2023/04/13 16:32:57 by cherrewi      #+#    #+#                 */
+/*   Updated: 2023/04/13 17:02:38 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 check if string has format:
-optionally starts with a minus sign '-'
+optionally starts with a plus '+' or minus '-' sign
 only consists of digits [0-9]
 is within range [INT_MIN, INT_MAX]
 */
@@ -43,4 +43,46 @@ bool	ft_isinteger(char *int_str)
 	}
 	num = num * sign;
 	return (num >= INT_MIN && num <= INT_MAX);
+}
+
+// assumes there is no circular reference in the stack yet
+static int	add_new_to_stack(int num, t_stack **stack)
+{
+	t_stack	*new;
+	t_stack	*last;
+
+	new = malloc(sizeof(t_stack));
+	if (new == NULL)
+		return (-1);
+	new->value = num;
+	new->next = NULL;
+	new->previous = NULL;
+	new->index = 0;
+	if (*stack == NULL)
+		*stack = new;
+	else
+	{
+		last = stack_get_last(*stack);
+		last->next = new;
+		new->previous = last;
+	}
+	return (0);
+}
+
+int	parse_input(int argc, char *argv[], t_stack **stack_a)
+{
+	t_stack	*last;
+	int		i;
+
+	i = 1;
+	while (i < argc)
+	{		
+		if (add_new_to_stack(ft_atoi(argv[i]), stack_a) < 0)
+			return (-1);
+		i++;
+	}
+	last = stack_get_last(*stack_a);
+	last->next = *stack_a;
+	(*stack_a)->previous = last;
+	return (0);
 }
