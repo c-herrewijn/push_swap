@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/13 16:32:57 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/13 17:02:38 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/13 19:55:40 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,32 @@ bool	ft_isinteger(char *int_str)
 	}
 	num = num * sign;
 	return (num >= INT_MIN && num <= INT_MAX);
+}
+
+static void	normalize_input(t_stack *stack)
+{
+	t_stack	*i;
+	t_stack	*j;
+	size_t	count;
+
+	i = stack;
+	while (true)
+	{
+		j = stack;
+		count = 0;
+		while (true)
+		{
+			if (i->value > j->value)
+				count++;
+			j = j->next;
+			if (j == stack)
+				break ;
+		}
+		i->index = count;
+		i = i->next;
+		if (i == stack)
+			break ;
+	}
 }
 
 // assumes there is no circular reference in the stack yet

@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:40:56 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/13 17:06:41 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/13 19:54:46 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,21 @@ int	main(int argc, char *argv[])
 		write(STDERR_FILENO, "Error\n", 6);
 		exit(1);
 	}
+	normalize_input(stack_a);
 
-	// todo: normalize input
+
+	// debug
+	// int a = 0;
+	// t_stack	*record = stack_a;
+	// printf("value: %d - index: %d\n", record->value, record->index);
+	// record = record->next;
+	// while (record != stack_a)
+	// {
+	// 	printf("value: %d - index: %d\n", record->value, record->index);
+	// 	record = record->next;
+	// 	a++;
+	// }
+
 	// todo: sort algorithm
 
 
