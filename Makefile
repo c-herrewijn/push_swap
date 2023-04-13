@@ -2,7 +2,7 @@ NAME = push_swap
 # FLAGS = -Wall -Werror -Wextra
 FLAGS = -Wall -Werror -Wextra -g
 SRC_DIR = sources
-SRCS = main.c stack_utils.c parsing.c
+SRCS = main.c stack_utils.c parsing.c debug_utils.c
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 LIBFT_DIR = libft
