@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:40:56 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/13 20:34:27 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/14 17:15:55 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ validate number of argc
 validate individual args, should be valid integers
 i.e. within range [INT_MIN, INT_MAX]
 */
-bool	is_valid_input(int argc, char *argv[])
+static bool	is_valid_input(int argc, char *argv[])
 {
 	int	i;
 	int	j;
@@ -61,7 +61,8 @@ int	main(int argc, char *argv[])
 	normalize_input(stack_a);
 
 	// debug
-	print_stack(stack_a);
+	printf("str: %s\n", str_from_stack(stack_a));
+	// print_stack(stack_a);
 	
 	// dummy out:
 	puts("pb");
