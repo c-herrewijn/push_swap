@@ -14,17 +14,69 @@ void test_basic_operations(void)
 	parse_input(argc, argv, &stack_a);
 	assert(ft_strncmp("11 22 33 44 ", str_from_stack(stack_a), 12) == 0);
 
+	// swap
 	swap(&stack_a);
 	assert(ft_strncmp("22 11 33 44 ", str_from_stack(stack_a), 12) == 0);
 
-	push_to(&stack_b, &stack_a);
+	// push
+	push(&stack_b, &stack_a);
 	assert(ft_strncmp("11 33 44 ", str_from_stack(stack_a), 9) == 0);
 	assert(ft_strncmp("22 ", str_from_stack(stack_b), 3) == 0);
-	// todo: more cases to test the push_to; (push-to empty/not empty; take from empty/not empty) 
 
-	// todo:
-	// test rotate();
-	// test reverse_rotate();
+	push(&stack_b, &stack_a);
+	assert(ft_strncmp("33 44 ", str_from_stack(stack_a), 6) == 0);
+	assert(ft_strncmp("11 22 ", str_from_stack(stack_b), 6) == 0);
+
+	push(&stack_b, &stack_a);
+	assert(ft_strncmp("44 ", str_from_stack(stack_a), 3) == 0);
+	assert(ft_strncmp("33 11 22 ", str_from_stack(stack_b), 9) == 0);
+	
+	push(&stack_b, &stack_a);
+	assert(ft_strncmp("", str_from_stack(stack_a), 0) == 0);
+	assert(ft_strncmp("44 33 11 22 ", str_from_stack(stack_b), 12) == 0);
+	
+	push(&stack_a, &stack_b);
+	assert(ft_strncmp("44 ", str_from_stack(stack_a), 3) == 0);
+	assert(ft_strncmp("33 11 22 ", str_from_stack(stack_b), 9) == 0);
+
+	// rotate
+	rotate(&stack_a, 'n');
+	assert(ft_strncmp("44 ", str_from_stack(stack_a), 3) == 0);
+
+	rotate(&stack_b, 'n');
+	assert(ft_strncmp("11 22 33 ", str_from_stack(stack_b), 9) == 0);
+
+	// reverse rotate
+	rotate(&stack_a, 'r');
+	assert(ft_strncmp("44 ", str_from_stack(stack_a), 3) == 0);
+
+	rotate(&stack_b, 'r');
+	assert(ft_strncmp("33 11 22 ", str_from_stack(stack_b), 9) == 0);
+
+	// -------------------------
+	// a-typical cases: program should not crash, action should have no effect!
+	
+	// swap stack with 1 items
+	swap(&stack_a);
+	assert(ft_strncmp("44 ", str_from_stack(stack_a), 3) == 0);
+	
+	// swap stack with 0 items
+	push(&stack_b, &stack_a);
+	assert(ft_strncmp("", str_from_stack(stack_a), 0) == 0);
+	swap(&stack_a);
+	assert(ft_strncmp("", str_from_stack(stack_a), 0) == 0);
+
+	// try to push from a stack that has no itmes
+	push(&stack_b, &stack_a);
+	assert(ft_strncmp("", str_from_stack(stack_a), 0) == 0);
+	assert(ft_strncmp("44 33 11 22 ", str_from_stack(stack_b), 12) == 0);
+
+	// rotate empty stack
+	rotate(&stack_a, 'n');
+	assert(ft_strncmp("", str_from_stack(stack_a), 0) == 0);
+	
+	rotate(&stack_a, 'r');
+	assert(ft_strncmp("", str_from_stack(stack_a), 0) == 0);
 
 	puts("test_basic_operations OK");
 }

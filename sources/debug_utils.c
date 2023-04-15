@@ -9,9 +9,9 @@ void print_stack(t_stack *stack)
 	first = stack;
 	while (true)
 	{
-		// printf("%d ", stack->value);		
+		printf("%d ", stack->value);		
 		// printf("value: %d - index: %d\n", stack->value, stack->index);		
-		printf("value: %d - index: %d - current: %p, next: %p, previous %p\n", stack->value, stack->index, stack, stack->next, stack->previous);		
+		// printf("value: %d - index: %d - current: %p, next: %p, previous %p\n", stack->value, stack->index, stack, stack->next, stack->previous);		
 		stack = stack->next;
 		if (stack == first)
 			break ;
@@ -25,8 +25,13 @@ char *str_from_stack(t_stack *stack)
 	size_t	malloc_size = 0;
 	char	*str;
 
+	// special case: empty stack
 	if (stack == NULL)
+	{
+		str = malloc(1 * sizeof(char));
+		str[0] = '\0';
 		return NULL;
+	}
 	
 	// determine malloc size
 	first = stack;
