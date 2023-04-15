@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/13 20:43:44 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/15 20:18:25 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/15 21:56:57 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,15 @@ void	swap(t_stack **stack)
 	second = first->next;
 	third = second->next;
 	last = first->previous;
-	first->next = third;
-	third->previous = first;
-	second->next = first;
-	first->previous = second;
-	last->next = second;
-	second->previous = last;
+	if (first->next->next != first)
+	{		
+		first->next = third;
+		third->previous = first;
+		second->next = first;
+		first->previous = second;
+		last->next = second;
+		second->previous = last;
+	}
 	*stack = second;
 }
 

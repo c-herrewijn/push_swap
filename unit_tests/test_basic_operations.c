@@ -14,11 +14,28 @@ void test_basic_operations(void)
 	parse_input(argc, argv, &stack_a);
 	assert(ft_strncmp("11 22 33 44 ", str_from_stack(stack_a), 12) == 0);
 
-	// swap
+	// swap stack of 4
 	swap(&stack_a);
 	assert(ft_strncmp("22 11 33 44 ", str_from_stack(stack_a), 12) == 0);
+	
+	// swap stack of 3
+	push(&stack_b, &stack_a);
+	swap(&stack_a);
+	assert(ft_strncmp("33 11 44 ", str_from_stack(stack_a), 9) == 0);
+	swap(&stack_a);
+	push(&stack_a, &stack_b);
 
-	// push
+	// swap stack of 2
+	push(&stack_b, &stack_a);
+	push(&stack_b, &stack_a);
+	swap(&stack_a);
+	assert(ft_strncmp("44 33 ", str_from_stack(stack_a), 6) == 0);
+	swap(&stack_a);
+	push(&stack_a, &stack_b);
+	push(&stack_a, &stack_b);
+	// printf("%s\n", str_from_stack(stack_a));
+
+	// push (starts with "22 11 33 44 ")
 	push(&stack_b, &stack_a);
 	assert(ft_strncmp("11 33 44 ", str_from_stack(stack_a), 9) == 0);
 	assert(ft_strncmp("22 ", str_from_stack(stack_b), 3) == 0);

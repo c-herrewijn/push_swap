@@ -53,6 +53,9 @@ int	main(int argc, char *argv[])
 		write(STDERR_FILENO, "Error\n", 6);
 		exit(1);
 	}
+	// only 1 number, no sorting is needed
+	if (argc == 2)
+		exit(0);
 	if (parse_input(argc, argv, &stack_a) < 0)
 	{
 		write(STDERR_FILENO, "Error\n", 6);
