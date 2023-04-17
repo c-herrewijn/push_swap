@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:40:56 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/14 17:15:55 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/17 21:12:12 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	main(int argc, char *argv[])
 {
 	t_stack	*stack_a;  // points to the top of the stack
 	t_stack	*stack_b;  // points to the top of the stack
+	t_stack	**staying_numbers;  // stack with numbers that can stay in stack_a
+	size_t	nr_count;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -61,10 +63,13 @@ int	main(int argc, char *argv[])
 		write(STDERR_FILENO, "Error\n", 6);
 		exit(1);
 	}
+	nr_count = argc - 1;
 	normalize_input(stack_a);
 
+	staying_numbers = get_staying_numbers(stack_a, nr_count);
+
 	// debug
-	printf("str: %s\n", str_from_stack(stack_a));
+	// printf("str: %s\n", str_from_stack(stack_a));
 	// print_stack(stack_a);
 	
 	// dummy out:

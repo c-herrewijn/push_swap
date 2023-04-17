@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/13 16:32:57 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/13 20:03:29 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/17 16:50:23 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	add_new_to_stack(int num, t_stack **stack)
 	t_stack	*new;
 	t_stack	*last;
 
-	new = malloc(sizeof(t_stack));
+	new = ft_calloc(1, sizeof(t_stack));
 	if (new == NULL)
 		return (-1);
 	new->value = num;
