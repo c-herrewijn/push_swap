@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/17 20:47:49 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/18 16:27:34 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <assert.h>
 # include "../libft/libft.h"
 
 typedef struct s_stack
@@ -46,7 +47,11 @@ t_stack	*stack_get_last(t_stack *stack);
 t_stack	**get_staying_numbers(t_stack *stack_a, size_t nr_count);
 t_stack	**add_new_path(t_stack ***all_paths, size_t nr_count);
 void	add_node_to_path(t_stack **path, t_stack *node);
-void	copy_path(t_stack ***all_paths, t_stack **path_to_copy, size_t nr_count);
+void	duplicate_path(t_stack ***all_paths, t_stack **path_to_copy, size_t nr_count);
+size_t	path_get_length(t_stack **path);
+bool	can_be_added_to_path(t_stack **path, t_stack *node);
+t_stack	**best_path_to_add_node(t_stack **path1, t_stack **path2,
+	t_stack *node);
 
 // debug
 void	print_stack(t_stack *stack);

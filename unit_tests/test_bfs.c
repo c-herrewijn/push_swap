@@ -23,7 +23,7 @@ void test_bfs_utils(void)
 	add_node_to_path(path2, &node2);
 	assert(ft_strncmp("43 ", str_from_bfs_path(path2), 3) == 0);
 	
-	copy_path(all_paths, path1, nr_count);
+	duplicate_path(all_paths, path1, nr_count);
 	assert(ft_strncmp("42 42 43 ", str_from_bfs_path(all_paths[0]), 9) == 0);
 	assert(ft_strncmp("43 ", str_from_bfs_path(all_paths[1]), 3) == 0);
 	assert(ft_strncmp("42 42 43 ", str_from_bfs_path(all_paths[2]), 9) == 0);

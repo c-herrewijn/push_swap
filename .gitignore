@@ -4,3 +4,5 @@ push_swap
 visualizer/*
 *.ini
 .vscode
+*.out
+temp.c
