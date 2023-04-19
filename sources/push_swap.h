@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/18 16:27:34 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/19 16:22:24 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ size_t	path_get_length(t_stack **path);
 bool	can_be_added_to_path(t_stack **path, t_stack *node);
 t_stack	**best_path_to_add_node(t_stack **path1, t_stack **path2,
 	t_stack *node);
+size_t	path_get_last_index(t_stack **path);
+size_t	path_get_first_index(t_stack **path);
+void	prune_sub_optimal_paths(t_stack ***all_paths);
+
+// void	remove_node(t_stack **path, t_stack *node);
+void	remove_path(t_stack ***all_paths, t_stack **path);
 
 // debug
 void	print_stack(t_stack *stack);

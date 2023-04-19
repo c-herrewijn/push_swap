@@ -6,18 +6,19 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/15 20:35:49 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/18 16:27:28 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/19 16:21:59 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+// finds best path with specific length and adds the node to it
 static void	add_node_to_existing_path_with_len(t_stack ***all_paths,
 			t_stack *node, size_t nr_count, size_t len)
 {
 	int		i;
-	t_stack	**best_path; // will contain the path to which the node will be added
-	
+	t_stack	**best_path;
+
 	i = 0;
 	best_path = NULL;
 	while (all_paths[i] != NULL)
@@ -71,8 +72,7 @@ t_stack	**get_staying_numbers(t_stack *stack, size_t nr_count)
 		// add new path for just the new node -> TODO malloc error handling!
 		new_path = add_new_path(all_paths, nr_count);
 		add_node_to_path(new_path, stack);
-
-		// TODO: prune sub-optimal lists;
+		prune_sub_optimal_paths(all_paths);
 
 		stack = stack->next;
 		if (stack == first)

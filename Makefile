@@ -1,8 +1,8 @@
 NAME = push_swap
 # FLAGS = -Wall -Werror -Wextra
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Wextra -g
 SRC_DIR = sources
-SRCS = bfs_utils.c breadth_first_search.c debug_utils.c main.c operations.c parsing.c stack_utils.c
+SRCS = bfs_prune.c bfs_utils.c breadth_first_search.c debug_utils.c main.c operations.c parsing.c stack_utils.c
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 LIBFT_DIR = libft
@@ -38,7 +38,7 @@ test: test.out
 TEST_SRCS = run_tests.c test_bfs.c test_isinteger.c test_basic_operations.c
 TEST_OBJS = $(addprefix unit_tests/, $(TEST_SRCS:.c=.o))
 
-BASE_SRCS = bfs_utils.c breadth_first_search.c debug_utils.c operations.c parsing.c stack_utils.c
+BASE_SRCS = bfs_prune.c bfs_utils.c breadth_first_search.c debug_utils.c operations.c parsing.c stack_utils.c
 BASE_OBJS = $(addprefix $(OBJ_DIR)/, $(BASE_SRCS:.c=.o))
 
 unit_tests/%.o: unit_tests/%.c
