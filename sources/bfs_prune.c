@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/19 11:18:53 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/19 16:29:15 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/19 16:54:54 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,10 @@ void	remove_node(t_stack **path, t_stack *node)
 }
 
 /* compares path2 with path1
-/  return 'true' means that the range of path2 fully covers the range of path1
-/  this also implies that path2 can be removed
+/  return 'true' means:
+/   - path2 has fewer or equal nodes then path1
+/   - AND the range of path2 fully covers the range of path1
+/  this implies that path2 is inferior to path1
 */
 static bool	paths_overlap(t_stack **path1, t_stack **path2)
 {
@@ -79,6 +81,8 @@ static bool	paths_overlap(t_stack **path1, t_stack **path2)
 	size_t	p2_start;
 	size_t	p2_end;
 
+	if (path_get_length(path1) < path_get_length(path2))
+		return (false);
 	p1_start = path_get_first_index(path1);
 	p1_end = path_get_last_index(path1);
 	p2_start = path_get_first_index(path2);
@@ -95,11 +99,11 @@ static bool	paths_overlap(t_stack **path1, t_stack **path2)
 	return (false);
 }
 
-/* compare paths with equal length, prune those with:
-/  equal or worse start AND 
-/  equal or worse end AND 
+/* prunes unpromising paths
+/  based on pairwise comparison on start-end range and amount of nodes
+/  paths with worse start-end range and equal or fewer nodes are pruned
 */
-static void	prune_paths_with_len(t_stack ***all_paths, size_t len)
+static void	prune_sub_optimal_paths(t_stack ***all_paths)
 {
 	int		i;
 	int		j;
@@ -108,21 +112,15 @@ static void	prune_paths_with_len(t_stack ***all_paths, size_t len)
 	i = 0;
 	while (all_paths[i] != NULL)
 	{
-		if (path_get_length(all_paths[i]) == len)
-		{			
-			j = 0;
-			while (all_paths[j] != NULL)
+		j = 0;
+		while (all_paths[j] != NULL)
+		{
+			if (i != j && paths_overlap(all_paths[j], all_paths[i]))
 			{
-				if (i != j && path_get_length(all_paths[j]) == len)
-				{
-					if (paths_overlap(all_paths[j], all_paths[i]))
-					{
-						prune_path_i = true;
-						break ;
-					}	
-				}
-				j++;
-			}
+				prune_path_i = true;
+				break ;
+			}	
+			j++;
 		}
 		if (prune_path_i == true)
 		{
@@ -131,31 +129,5 @@ static void	prune_paths_with_len(t_stack ***all_paths, size_t len)
 		}
 		else
 			i++;
-	}
-}
-
-void	prune_sub_optimal_paths(t_stack ***all_paths)
-{
-	size_t	max_len;
-	size_t	len;
-	size_t	path_len;
-	int		i;
-
-	if (all_paths == NULL)
-		return ;
-	max_len = 0;
-	i = 0;
-	while (all_paths[i] != NULL)
-	{
-		path_len = path_get_length(all_paths[i]);
-		if (path_len > max_len)
-			max_len = path_len;
-		i++;
-	}
-	len = 2;
-	while (len < max_len)
-	{
-		prune_paths_with_len(all_paths, len);
-		len++;
 	}
 }
