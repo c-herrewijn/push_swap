@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:40:56 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/21 12:12:53 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/21 15:34:22 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ void	exit_with_error(t_stack *stack_a, t_stack *stack_b)
 
 int	main(int argc, char *argv[])
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-	t_stack	**staying_numbers;
-	size_t	nr_count;
+	t_stack		*stack_a;
+	t_stack		*stack_b;
+	t_stack		**staying_numbers;
+	size_t		nr_count;
+	t_operation *operations;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -69,6 +70,9 @@ int	main(int argc, char *argv[])
 	staying_numbers = get_staying_numbers(stack_a, nr_count);
 	if (staying_numbers == NULL)
 		exit_with_error(stack_a, stack_b);
+	
+	operations = push_to_b(stack_a, stack_b, staying_numbers, nr_count);
+	print_operations(operations);
 
 	// debug
 	// printf("str: %s\n", str_from_bfs_path(staying_numbers));
@@ -78,6 +82,7 @@ int	main(int argc, char *argv[])
 	free_nodes_in_stack(stack_a);
 	free_nodes_in_stack(stack_b);
 	free(staying_numbers);
+	// todo free operations
 	
 	// dummy out:
 	puts("pb");
