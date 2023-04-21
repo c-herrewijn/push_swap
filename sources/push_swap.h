@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/21 15:24:02 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/21 19:41:19 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ typedef struct s_stack
 	struct s_stack	*next;
 }	t_stack;
 
-typedef struct s_operation
-{
-	char				name[4];
-	struct s_operation	*next;
-}	t_operation;
-
 // parsing
 int			parse_input(int argc, char *argv[], t_stack **stack_a);
 void		normalize_input(t_stack *stack);
@@ -54,6 +48,7 @@ t_stack		**best_path_for_node(t_stack **path1, t_stack **path2,
 				t_stack *node);
 void		free_bfs_paths(t_stack ***all_paths, t_stack **best_path);
 t_stack		**clean_and_select_best_path(t_stack ***all_paths);
+bool		node_in_path(t_stack *node, t_stack **path);
 size_t		nr_of_paths(t_stack ***all_paths);
 size_t		path_get_length(t_stack **path);
 size_t		path_get_last_index(t_stack **path);
@@ -62,9 +57,10 @@ void		remove_path(t_stack ***all_paths, t_stack **path);
 void		prune_sub_optimal_paths(t_stack ***all_paths);
 
 // algorithm
-t_operation	*push_to_b(t_stack *stack_a, t_stack *stack_b,
-				t_stack **staying_numbers, size_t nr_count);
-void		print_operations(t_operation *operations);
+void		push_to_b(t_stack **stack_a, t_stack **stack_b,
+				t_stack **staying_numbers);
+void		execute_operation(t_stack **stack_a, t_stack **stack_b,
+				char *command);
 
 // stack utils
 t_stack		*stack_get_last(t_stack *stack);

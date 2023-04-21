@@ -6,11 +6,27 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/20 17:49:11 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/20 17:49:49 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/21 17:24:39 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+bool	node_in_path(t_stack *node, t_stack **path)
+{
+	int	i;
+
+	if (path == NULL || path[0] == NULL)
+		return (false);
+	i = 0;
+	while (path[i] != NULL)
+	{
+		if (path[i] == node)
+			return (true);
+		i++;
+	}
+	return (false);
+}
 
 size_t	nr_of_paths(t_stack ***all_paths)
 {

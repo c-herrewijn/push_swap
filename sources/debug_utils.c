@@ -82,6 +82,7 @@ void print_stack(t_stack *stack)
 		if (stack == first)
 			break ;
 	}
+	puts("");
 }
 
 char *str_from_stack(t_stack *stack)
