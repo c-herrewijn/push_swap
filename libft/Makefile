@@ -6,7 +6,7 @@
 #    By: cherrewi <cherrewi@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/19 15:14:28 by cherrewi      #+#    #+#                  #
-#    Updated: 2023/04/11 16:38:46 by cherrewi      ########   odam.nl          #
+#    Updated: 2023/04/21 13:47:07 by cherrewi      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS =	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c \
 		ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c \
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-		ft_printf.c ft_printf_utils.c ft_isspace.c \
+		ft_printf.c ft_printf_utils.c ft_isspace.c ft_isinteger.c \
 		ft_printf_fd.c ft_printf_utils_fd.c
 SRCS_BONUS =	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 				ft_lstlast.c ft_lstadd_back.c \

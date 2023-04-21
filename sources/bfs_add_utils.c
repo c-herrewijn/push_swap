@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/18 13:01:00 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/20 17:55:34 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/21 13:46:09 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ t_stack	**add_new_path(t_stack ***all_paths, size_t nr_count)
 {
 	int	i;
 
-	if (nr_of_paths(all_paths) > nr_count * 9 + 1)
-	{
-		puts("debug: almost out of paths!"); // todo: remove debug line!
-	}
+	assert(nr_of_paths(all_paths) < nr_count * 9 + 1);
 	i = 0;
 	while (all_paths[i] != NULL)
 		i++;
@@ -83,7 +80,7 @@ bool	can_be_added_to_path(t_stack **path, t_stack *node)
 		return (node->index > last_index && node->index < first_index);
 }
 
-/* 
+/*
 Assumptions:
 - path1 and path2 have equal lengths
 - the node fits at the end of both paths

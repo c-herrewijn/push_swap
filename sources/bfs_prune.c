@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/19 11:18:53 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/20 16:09:51 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/21 13:41:59 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,39 +40,11 @@ void	remove_path(t_stack ***all_paths, t_stack **path)
 }
 
 /*
-set node to NULL, move tail part upwards
-no free required, because path only contains pointers
-the actual node instance needs to be retained 
-(we only remove it from the path, not from the stack)
-*/
-void	remove_node(t_stack **path, t_stack *node)
-{
-	int		i;
-	bool	start_moving_tail_end;
-
-	i = 0;
-	start_moving_tail_end = false;
-	while (path[i] != NULL)
-	{
-		if (start_moving_tail_end == true)
-		{
-			path[i - 1] = path[i];
-			path[i] = NULL;
-		}
-		if (path[i] == node)
-		{
-			start_moving_tail_end = true;
-			path[i] = NULL;
-		}
-		i++;
-	}
-}
-
-/* compares path2 with path1
-/  return 'true' means:
-/   - path2 has fewer or equal nodes then path1
-/   - AND the range of path2 fully covers the range of path1
-/  this implies that path2 is inferior to path1
+compares path2 with path1
+return 'true' means:
+ - path2 has fewer or equal nodes then path1
+ - AND the range of path2 fully covers the range of path1
+this implies that path2 is inferior to path1
 */
 static bool	paths_overlap(t_stack **path1, t_stack **path2)
 {
@@ -99,9 +71,10 @@ static bool	paths_overlap(t_stack **path1, t_stack **path2)
 	return (false);
 }
 
-/* prunes unpromising paths
-/  based on pairwise comparison on start-end range and amount of nodes
-/  paths with worse start-end range and equal or fewer nodes are pruned
+/*
+prunes unpromising paths
+based on pairwise comparison on start-end range and amount of nodes
+paths with worse start-end range and equal or fewer nodes are pruned
 */
 void	prune_sub_optimal_paths(t_stack ***all_paths)
 {
@@ -119,7 +92,7 @@ void	prune_sub_optimal_paths(t_stack ***all_paths)
 			{
 				prune_path_i = true;
 				break ;
-			}	
+			}
 			j++;
 		}
 		if (prune_path_i == true)

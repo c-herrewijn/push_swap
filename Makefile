@@ -2,7 +2,7 @@ NAME = push_swap
 # FLAGS = -Wall -Werror -Wextra
 FLAGS = -Wall -Wextra -g
 SRC_DIR = sources
-SRCS = bfs_add_utils.c bfs_length_utils.c bfs_prune.c breadth_first_search.c debug_utils.c main.c operations.c parsing.c stack_utils.c
+SRCS = bfs_add_utils.c bfs_cleanup.c bfs_length_utils.c bfs_prune.c breadth_first_search.c debug_utils.c main.c operations.c parsing.c stack_utils.c
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 LIBFT_DIR = libft
@@ -38,7 +38,7 @@ test: test.out
 TEST_SRCS = run_tests.c test_bfs.c test_isinteger.c test_basic_operations.c test_get_staying_numbers.c
 TEST_OBJS = $(addprefix unit_tests/, $(TEST_SRCS:.c=.o))
 
-BASE_SRCS = bfs_add_utils.c bfs_length_utils.c bfs_prune.c breadth_first_search.c debug_utils.c operations.c parsing.c stack_utils.c
+BASE_SRCS = bfs_add_utils.c bfs_cleanup.c bfs_length_utils.c bfs_prune.c breadth_first_search.c debug_utils.c operations.c parsing.c stack_utils.c
 BASE_OBJS = $(addprefix $(OBJ_DIR)/, $(BASE_SRCS:.c=.o))
 
 unit_tests/%.o: unit_tests/%.c

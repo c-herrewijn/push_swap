@@ -11,7 +11,7 @@ void print_all_bfs_paths(t_stack ***all_paths)
 		j = 0;
 		while (all_paths[i][j] != NULL)
 		{
-			printf("%d ", (all_paths[i][j])->value);	
+			printf("%d ", (all_paths[i][j])->value);
 			j++;
 		}
 		i++;
@@ -26,7 +26,7 @@ void print_bfs_path(t_stack **path)
 	i = 0;
 	while (path[i] != NULL)
 	{
-		printf("%d ", (path[i])->value);	
+		printf("%d ", (path[i])->value);
 		i++;
 	}
 	puts("--");
@@ -35,7 +35,7 @@ void print_bfs_path(t_stack **path)
 char *str_from_bfs_path(t_stack **path)
 {
 	char *str;
-	
+
 	// special case: empty path
 	if (path == NULL)
 	{
@@ -43,7 +43,7 @@ char *str_from_bfs_path(t_stack **path)
 		str[0] = '\0';
 		return str;
 	}
-	
+
 	// determine malloc size
 	size_t	malloc_size = 0;
 	int i = 0;
@@ -75,9 +75,9 @@ void print_stack(t_stack *stack)
 	first = stack;
 	while (true)
 	{
-		printf("%d ", stack->value);		
-		// printf("value: %d - index: %d\n", stack->value, stack->index);		
-		// printf("value: %d - index: %d - current: %p, next: %p, previous %p\n", stack->value, stack->index, stack, stack->next, stack->previous);		
+		printf("%d ", stack->value);	
+		// printf("value: %d - index: %d\n", stack->value, stack->index);	
+		// printf("value: %d - index: %d - current: %p, next: %p, previous %p\n", stack->value, stack->index, stack, stack->next, stack->previous);	
 		stack = stack->next;
 		if (stack == first)
 			break ;
@@ -97,7 +97,7 @@ char *str_from_stack(t_stack *stack)
 		str[0] = '\0';
 		return str;
 	}
-	
+
 	// determine malloc size
 	first = stack;
 	while (true)
