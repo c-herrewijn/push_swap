@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   bfs_utils.c                                        :+:    :+:            */
+/*   bfs_add_utils.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/18 13:01:00 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/18 16:03:12 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/20 17:55:34 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@ t_stack	**add_new_path(t_stack ***all_paths, size_t nr_count)
 {
 	int	i;
 
+	if (nr_of_paths(all_paths) > nr_count * 9 + 1)
+	{
+		puts("debug: almost out of paths!"); // todo: remove debug line!
+	}
 	i = 0;
 	while (all_paths[i] != NULL)
 		i++;
-	all_paths[i] = ft_calloc(nr_count + 100, sizeof(t_stack *));  // should be nr_count + 1
-	if (*all_paths == NULL)
-	{
-		puts("error");
+	all_paths[i] = ft_calloc(nr_count + 1, sizeof(t_stack *));
+	if (all_paths[i] == NULL)
 		return (NULL);
-	}
 	return (all_paths[i]);
 }
 
@@ -38,7 +39,7 @@ void	add_node_to_path(t_stack **path, t_stack *node)
 	path[i] = node;
 }
 
-void	duplicate_path(t_stack ***all_paths, t_stack **path_to_copy,
+int	duplicate_path(t_stack ***all_paths, t_stack **path_to_copy,
 	size_t nr_count)
 {
 	t_stack	**new_path;
@@ -47,39 +48,15 @@ void	duplicate_path(t_stack ***all_paths, t_stack **path_to_copy,
 	assert(path_to_copy != NULL);
 	assert(all_paths != NULL);
 	new_path = add_new_path(all_paths, nr_count);
+	if (new_path == NULL)
+		return (-1);
 	i = 0;
 	while (path_to_copy[i] != NULL)
 	{
 		new_path[i] = path_to_copy[i];
 		i++;
 	}
-}
-
-size_t	path_get_length(t_stack **path)
-{
-	size_t	i;
-
-	if (path == NULL)
-		return (0);
-	i = 0;
-	while (path[i] != NULL)
-		i++;
-	return (i);
-}
-
-size_t	path_get_first_index(t_stack **path)
-{
-	return (path[0]->index);
-}
-
-size_t	path_get_last_index(t_stack **path)
-{
-	size_t	i;
-
-	i = 0;
-	while (path[i] != NULL)
-		i++;
-	return (path[i - 1]->index);
+	return (0);
 }
 
 // checks if a node can be added to a path without breaking the circularity
@@ -116,7 +93,7 @@ LOGIC:
 - if both paths start indices are smaller or bigger than the new node, the
   path with the largest start wins
 */
-t_stack	**best_path_to_add_node(t_stack **path1, t_stack **path2,
+t_stack	**best_path_for_node(t_stack **path1, t_stack **path2,
 	t_stack *node)
 {
 	size_t	p1_first_index;

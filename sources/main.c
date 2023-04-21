@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:40:56 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/17 21:12:12 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/21 12:12:53 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,36 +41,43 @@ static bool	is_valid_input(int argc, char *argv[])
 	return (true);
 }
 
+void	exit_with_error(t_stack *stack_a, t_stack *stack_b)
+{
+	write(STDERR_FILENO, "Error\n", 6);
+	free_nodes_in_stack(stack_a);
+	free_nodes_in_stack(stack_b);
+	exit(1);
+}
+
 int	main(int argc, char *argv[])
 {
-	t_stack	*stack_a;  // points to the top of the stack
-	t_stack	*stack_b;  // points to the top of the stack
-	t_stack	**staying_numbers;  // stack with numbers that can stay in stack_a
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+	t_stack	**staying_numbers;
 	size_t	nr_count;
 
 	stack_a = NULL;
 	stack_b = NULL;
 	if (is_valid_input(argc, argv) == false)
-	{
-		write(STDERR_FILENO, "Error\n", 6);
-		exit(1);
-	}
-	// only 1 number, no sorting is needed
+		exit_with_error(stack_a, stack_b);
 	if (argc == 2)
 		exit(0);
 	if (parse_input(argc, argv, &stack_a) < 0)
-	{
-		write(STDERR_FILENO, "Error\n", 6);
-		exit(1);
-	}
+		exit_with_error(stack_a, stack_b);
 	nr_count = argc - 1;
 	normalize_input(stack_a);
-
 	staying_numbers = get_staying_numbers(stack_a, nr_count);
+	if (staying_numbers == NULL)
+		exit_with_error(stack_a, stack_b);
 
 	// debug
-	// printf("str: %s\n", str_from_stack(stack_a));
+	// printf("str: %s\n", str_from_bfs_path(staying_numbers));
 	// print_stack(stack_a);
+	
+	// free after successfull program run
+	free_nodes_in_stack(stack_a);
+	free_nodes_in_stack(stack_b);
+	free(staying_numbers);
 	
 	// dummy out:
 	puts("pb");
