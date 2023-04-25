@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/19 11:18:53 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/21 13:41:59 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/25 16:52:44 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,33 +72,20 @@ static bool	paths_overlap(t_stack **path1, t_stack **path2)
 }
 
 /*
-prunes unpromising paths
-based on pairwise comparison on start-end range and amount of nodes
-paths with worse start-end range and equal or fewer nodes are pruned
+Prunes unpromising paths
+Based on pairwise comparison on start-end range and amount of nodes
+Paths with worse start-end range and equal or fewer nodes are pruned
 */
-void	prune_sub_optimal_paths(t_stack ***all_paths)
+void	compare_and_prune(t_stack ***all_paths, t_stack **new_path)
 {
-	int		i;
-	int		j;
-	bool	prune_path_i;
+	int	i;
 
 	i = 0;
 	while (all_paths[i] != NULL)
 	{
-		j = 0;
-		while (all_paths[j] != NULL)
-		{
-			if (i != j && paths_overlap(all_paths[j], all_paths[i]))
-			{
-				prune_path_i = true;
-				break ;
-			}
-			j++;
-		}
-		if (prune_path_i == true)
+		if (new_path != all_paths[i] && paths_overlap(new_path, all_paths[i]))
 		{
 			remove_path(all_paths, all_paths[i]);
-			prune_path_i = false;
 		}
 		else
 			i++;

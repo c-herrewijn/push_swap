@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/15 20:35:49 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/21 13:41:12 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/25 16:56:39 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,17 @@ static int	add_node_to_existing_path_with_len(t_stack ***all_paths,
 		if ((path_get_length(all_paths[i]) == len)
 			&& can_be_added_to_path(all_paths[i], node))
 		{
-			if (best_path == NULL)
-				best_path = all_paths[i];
-			else
-				best_path = best_path_for_node(best_path, all_paths[i], node);
+			best_path = best_path_for_node(best_path, all_paths[i], node);
 		}
 		i++;
 	}
 	if (best_path != NULL)
 	{
-		if (nr_of_paths(all_paths) < nr_count * 10 + 1)
+		if (nr_of_paths(all_paths) < ((nr_count * nr_count + nr_count) / 2))
 			if (duplicate_path(all_paths, best_path, nr_count) < 0)
 				return (-1);
 		add_node_to_path(best_path, node);
+		compare_and_prune(all_paths, best_path);
 	}
 	return (0);
 }
@@ -65,7 +63,7 @@ static int	create_new_path_for_node(t_stack ***all_paths, t_stack *node,
 	t_stack	**new_path;
 
 	new_path = NULL;
-	if (nr_of_paths(all_paths) < nr_count * 10 + 1)
+	if (nr_of_paths(all_paths) < ((nr_count * nr_count + nr_count) / 2))
 	{
 		new_path = add_new_path(all_paths, nr_count);
 		if (new_path == NULL)
@@ -78,13 +76,17 @@ static int	create_new_path_for_node(t_stack ***all_paths, t_stack *node,
 /*
 returns a list with numbers that remain in stack a
 assumes stack_a is circular
+max value for all_paths = (n^2 + n) / 2, which happens when the numbers are
+already ordered
+malloc size has one additional space for the terminating null pointer
 */
 t_stack	**get_staying_numbers(t_stack *stack, size_t nr_count)
 {
 	t_stack	***all_paths;
 	t_stack	*first;
 
-	all_paths = ft_calloc((nr_count * 10 + 1), sizeof(t_stack **));
+	all_paths = ft_calloc(((nr_count * nr_count + nr_count) / 2 + 1),
+			sizeof(t_stack **));
 	if (all_paths == NULL)
 		return (NULL);
 	first = stack;
@@ -96,7 +98,6 @@ t_stack	**get_staying_numbers(t_stack *stack, size_t nr_count)
 			free_bfs_paths(all_paths, NULL);
 			return (NULL);
 		}
-		prune_sub_optimal_paths(all_paths);
 		stack = stack->next;
 		if (stack == first)
 			break ;

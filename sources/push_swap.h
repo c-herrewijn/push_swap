@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/21 19:41:19 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/25 16:55:33 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ size_t		path_get_length(t_stack **path);
 size_t		path_get_last_index(t_stack **path);
 size_t		path_get_first_index(t_stack **path);
 void		remove_path(t_stack ***all_paths, t_stack **path);
-void		prune_sub_optimal_paths(t_stack ***all_paths);
+void		compare_and_prune(t_stack ***all_paths, t_stack **new_path);
 
 // algorithm
 void		push_to_b(t_stack **stack_a, t_stack **stack_b,
@@ -65,6 +65,7 @@ void		execute_operation(t_stack **stack_a, t_stack **stack_b,
 // stack utils
 t_stack		*stack_get_last(t_stack *stack);
 void		free_nodes_in_stack(t_stack *stack);
+size_t		stack_len(t_stack *stack);
 
 // debug
 void		print_stack(t_stack *stack);

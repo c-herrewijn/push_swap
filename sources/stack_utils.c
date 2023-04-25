@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/12 16:36:29 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/21 12:17:24 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/21 20:31:46 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,23 @@ t_stack	*stack_get_last(t_stack *stack)
 		stack_i = stack_i->next;
 	}
 	return (stack_i);
+}
+
+size_t	stack_len(t_stack *stack)
+{
+	t_stack	*stack_i;
+	size_t	count;
+
+	if (stack == NULL)
+		return (0);
+	count = 1;
+	stack_i = stack;
+	while (stack_i->next != NULL && stack_i->next != stack)
+	{
+		count++;
+		stack_i = stack_i->next;
+	}
+	return (count);
 }
 
 /*

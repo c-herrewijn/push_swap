@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/18 13:01:00 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/21 13:46:09 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/25 15:43:27 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_stack	**add_new_path(t_stack ***all_paths, size_t nr_count)
 {
 	int	i;
 
-	assert(nr_of_paths(all_paths) < nr_count * 9 + 1);
+	assert(nr_of_paths(all_paths) < ((nr_count * nr_count + nr_count) / 2));
 	i = 0;
 	while (all_paths[i] != NULL)
 		i++;
@@ -96,6 +96,12 @@ t_stack	**best_path_for_node(t_stack **path1, t_stack **path2,
 	size_t	p1_first_index;
 	size_t	p2_first_index;
 
+	if (path1 == NULL && path2 != NULL)
+		return (path2);
+	if (path1 != NULL && path2 == NULL)
+		return (path1);
+	if (path1 == NULL && path2 == NULL)
+		return (NULL);
 	p1_first_index = path_get_first_index(path1);
 	p2_first_index = path_get_first_index(path2);
 	if ((p1_first_index < node->index) ^ (p2_first_index < node->index))
