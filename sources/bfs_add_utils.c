@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/18 13:01:00 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/25 15:43:27 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/26 15:20:00 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_stack	**add_new_path(t_stack ***all_paths, size_t nr_count)
 {
 	int	i;
 
-	assert(nr_of_paths(all_paths) < ((nr_count * nr_count + nr_count) / 2));
 	i = 0;
 	while (all_paths[i] != NULL)
 		i++;
@@ -42,8 +41,6 @@ int	duplicate_path(t_stack ***all_paths, t_stack **path_to_copy,
 	t_stack	**new_path;
 	int		i;
 
-	assert(path_to_copy != NULL);
-	assert(all_paths != NULL);
 	new_path = add_new_path(all_paths, nr_count);
 	if (new_path == NULL)
 		return (-1);
