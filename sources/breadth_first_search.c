@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/15 20:35:49 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/25 16:56:39 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/26 15:09:02 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ static int	add_node_to_existing_path_with_len(t_stack ***all_paths,
 	}
 	if (best_path != NULL)
 	{
-		if (nr_of_paths(all_paths) < ((nr_count * nr_count + nr_count) / 2))
-			if (duplicate_path(all_paths, best_path, nr_count) < 0)
-				return (-1);
+		if (nr_of_paths(all_paths) < ((nr_count * nr_count + nr_count) / 2)
+			&& path_get_last_index(best_path) + 1 != node->index
+			&& duplicate_path(all_paths, best_path, nr_count) < 0)
+			return (-1);
 		add_node_to_path(best_path, node);
 		compare_and_prune(all_paths, best_path);
 	}
@@ -62,6 +63,8 @@ static int	create_new_path_for_node(t_stack ***all_paths, t_stack *node,
 {
 	t_stack	**new_path;
 
+	if (node->previous != NULL && node->previous->index + 1 == node->index)
+		return (0);
 	new_path = NULL;
 	if (nr_of_paths(all_paths) < ((nr_count * nr_count + nr_count) / 2))
 	{
