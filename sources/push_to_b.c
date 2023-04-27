@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/21 15:09:40 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/27 19:40:38 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/27 19:51:47 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,26 @@ static int	get_rotation_distance_grp(t_stack *stack, size_t group_bottom,
 	}
 }
 
+static void	rotate_b(t_stack **stack_b, int rotation_distance)
+{
+	if (rotation_distance < 0)
+	{
+		while (rotation_distance < 0)
+		{
+			execute_operation(NULL, stack_b, "rrb");
+			rotation_distance++;
+		}
+	}
+	if (rotation_distance > 0)
+	{
+		while (rotation_distance > 0)
+		{
+			execute_operation(NULL, stack_b, "rb");
+			rotation_distance--;
+		}
+	}
+}
+
 // rotation_distance: positive number is up, negative number is down
 static void	initial_push_to_b(t_stack **stack_a, t_stack **stack_b,
 	size_t nr_count)
@@ -73,22 +93,7 @@ static void	initial_push_to_b(t_stack **stack_a, t_stack **stack_b,
 	else
 		rotation_distance = get_rotation_distance_grp(*stack_b, group_2_start,
 				group_2_end);
-	if (rotation_distance < 0)
-	{
-		while (rotation_distance < 0)
-		{
-			execute_operation(stack_a, stack_b, "rrb");
-			rotation_distance++;
-		}
-	}
-	if (rotation_distance > 0)
-	{
-		while (rotation_distance > 0)
-		{
-			execute_operation(stack_a, stack_b, "rb");
-			rotation_distance--;
-		}
-	}
+	rotate_b(stack_b, rotation_distance);
 	execute_operation(stack_a, stack_b, "pb");
 }
 
