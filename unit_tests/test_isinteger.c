@@ -3,8 +3,6 @@
 
 void test_isinteger(void)
 {
-	puts("testing test_integer...");
-
 	// valid integers
 	assert(ft_isinteger("42") == true);
 	assert(ft_isinteger("-42") == true);

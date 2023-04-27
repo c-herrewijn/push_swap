@@ -35,7 +35,7 @@ test: test.out
 	@rm ./unit_tests/*.o
 	@rm test.out
 
-TEST_SRCS = run_tests.c test_bfs.c test_isinteger.c test_basic_operations.c test_get_staying_numbers.c
+TEST_SRCS = run_tests.c test_bfs.c test_isinteger.c test_basic_operations.c test_get_staying_numbers.c test_ft_abs.c
 TEST_OBJS = $(addprefix unit_tests/, $(TEST_SRCS:.c=.o))
 
 BASE_SRCS = bfs_add_utils.c bfs_cleanup.c bfs_length_utils.c bfs_prune.c breadth_first_search.c debug_utils.c operations_base.c operations_execute.c parsing.c push_back_to_a.c push_to_b.c stack_utils.c
