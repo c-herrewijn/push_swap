@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:40:56 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/21 19:41:26 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/27 19:32:55 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ int	main(int argc, char *argv[])
 	staying_numbers = get_staying_numbers(stack_a, nr_count);
 	if (staying_numbers == NULL)
 		exit_with_error(stack_a, stack_b);
-	push_to_b(&stack_a, &stack_b, staying_numbers);
-
+	push_all_to_b(&stack_a, &stack_b, staying_numbers, nr_count);
 
 	// debug
 	// printf("str: %s\n", str_from_bfs_path(staying_numbers));
