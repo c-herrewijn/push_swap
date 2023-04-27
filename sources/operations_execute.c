@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/21 19:17:23 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/21 19:26:15 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/27 19:14:50 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ static void	execute_rotate(t_stack **stack_a, t_stack **stack_b, char *command)
 {
 	if (ft_strncmp(command, "rra", 3) == 0)
 		rotate(stack_a, 'r');
-	if (ft_strncmp(command, "rrb", 3) == 0)
+	else if (ft_strncmp(command, "rrb", 3) == 0)
 		rotate(stack_b, 'r');
-	if (ft_strncmp(command, "rrr", 3) == 0)
+	else if (ft_strncmp(command, "rrr", 3) == 0)
 	{
 		rotate(stack_a, 'r');
 		rotate(stack_b, 'r');
 	}
-	if (ft_strncmp(command, "ra", 2) == 0)
+	else if (ft_strncmp(command, "ra", 2) == 0)
 		rotate(stack_a, 'n');
-	if (ft_strncmp(command, "rb", 2) == 0)
+	else if (ft_strncmp(command, "rb", 2) == 0)
 		rotate(stack_b, 'n');
-	if (ft_strncmp(command, "rr", 2) == 0)
+	else if (ft_strncmp(command, "rr", 2) == 0)
 	{
 		rotate(stack_a, 'n');
 		rotate(stack_b, 'n');
