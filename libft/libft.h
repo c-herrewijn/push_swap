@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/19 15:14:18 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/27 22:30:54 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/04/27 23:08:25 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,7 @@ void	printf_putunsignedhex(unsigned long long nbr,
 			int *print_len, char var_case);
 void	printf_putunsignedhex_fd(unsigned long long nbr,
 			int *print_len, char var_case, int fd);
+size_t	ft_max(size_t i, size_t j);
+size_t	ft_min(size_t i, size_t j);
 
 #endif
