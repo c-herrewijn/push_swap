@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/26 15:44:27 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/01 19:46:12 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ typedef struct s_stack
 	struct s_stack	*previous;
 	struct s_stack	*next;
 }	t_stack;
+
+typedef struct s_data
+{
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+	t_stack	**staying_numbers;
+	size_t	nr_count;
+	// optionally add:
+	// size_t	len_a;
+	// size_t	len_b;
+	// size_t	nr_of_staying_numbers;
+} t_data;
 
 // parsing
 int			parse_input(int argc, char *argv[], t_stack **stack_a);

@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:40:56 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/27 19:32:55 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/01 19:48:22 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,34 +51,33 @@ void	exit_with_error(t_stack *stack_a, t_stack *stack_b)
 
 int	main(int argc, char *argv[])
 {
-	t_stack		*stack_a;
-	t_stack		*stack_b;
-	t_stack		**staying_numbers;
-	size_t		nr_count;
+	t_data		data;
 
-	stack_a = NULL;
-	stack_b = NULL;
+	data.stack_a = NULL;
+	data.stack_b = NULL;
 	if (is_valid_input(argc, argv) == false)
-		exit_with_error(stack_a, stack_b);
+		exit_with_error(data.stack_a, data.stack_b);
 	if (argc == 2)
 		exit(0);
-	if (parse_input(argc, argv, &stack_a) < 0)
-		exit_with_error(stack_a, stack_b);
-	nr_count = argc - 1;
-	normalize_input(stack_a);
-	staying_numbers = get_staying_numbers(stack_a, nr_count);
-	if (staying_numbers == NULL)
-		exit_with_error(stack_a, stack_b);
-	push_all_to_b(&stack_a, &stack_b, staying_numbers, nr_count);
+	if (parse_input(argc, argv, &(data.stack_a)) < 0)
+		exit_with_error(data.stack_a, data.stack_b);
+	data.nr_count = argc - 1;
+	normalize_input(data.stack_a);
+	data.staying_numbers = get_staying_numbers(data.stack_a, data.nr_count);
+	if (data.staying_numbers == NULL)
+		exit_with_error(data.stack_a, data.stack_b);
+	push_all_to_b(&(data.stack_a), &(data.stack_b), data.staying_numbers, data.nr_count);
 
 	// debug
-	// printf("str: %s\n", str_from_bfs_path(staying_numbers));
+	// printf("str: %s\n", str_from_bfs_path(data.staying_numbers));
 	puts("stack a:");
-	print_stack(stack_a);
+	print_stack(data.stack_a);
 	puts("stack b:");
-	print_stack(stack_b);
-	
-	free_nodes_in_stack(stack_a);
-	free_nodes_in_stack(stack_b);
-	free(staying_numbers);
+	print_stack(data.stack_b);
+
+	free_nodes_in_stack(data.stack_a);
+	free_nodes_in_stack(data.stack_b);
+	free(data.staying_numbers);
 }
+
+	push_back_to_a(&(data.stack_a), &(data.stack_b), data.nr_count);
