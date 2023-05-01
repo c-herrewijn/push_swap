@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/01 19:46:12 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/01 20:00:32 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ void		remove_path(t_stack ***all_paths, t_stack **path);
 void		compare_and_prune(t_stack ***all_paths, t_stack **new_path);
 
 // algorithm
-void		push_all_to_b(t_stack **stack_a, t_stack **stack_b,
-				t_stack **staying_numbers, size_t nr_count);
+void		push_all_to_b(t_data *data);
 void		execute_operation(t_stack **stack_a, t_stack **stack_b,
 				char *command);
 

@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/21 15:09:40 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/27 19:51:47 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/01 20:03:02 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,25 +97,26 @@ static void	initial_push_to_b(t_stack **stack_a, t_stack **stack_b,
 	execute_operation(stack_a, stack_b, "pb");
 }
 
-void	push_all_to_b(t_stack **stack_a, t_stack **stack_b,
-				t_stack **staying_numbers, size_t nr_count)
+void	push_all_to_b(t_data *data)
 {
 	t_stack	*first_rotated_node;
 	size_t	nr_of_staying_numbers;
 
-	nr_of_staying_numbers = path_get_length(staying_numbers);
+	nr_of_staying_numbers = path_get_length(data->staying_numbers);
 	first_rotated_node = NULL;
-	while (*stack_a != NULL && stack_len(*stack_a) > nr_of_staying_numbers)
+	while (data->stack_a != NULL
+		&& stack_len(data->stack_a) > nr_of_staying_numbers)
 	{
-		if (node_in_path(*stack_a, staying_numbers))
+		if (node_in_path(data->stack_a, data->staying_numbers))
 		{
 			if (first_rotated_node == NULL)
-				first_rotated_node = *stack_a;
-			execute_operation(stack_a, stack_b, "ra");
+				first_rotated_node = data->stack_a;
+			execute_operation(&(data->stack_a), &(data->stack_b), "ra");
 		}
 		else
-			initial_push_to_b(stack_a, stack_b, nr_count);
-		if (*stack_a == first_rotated_node)
+			initial_push_to_b(&(data->stack_a), &(data->stack_b),
+				data->nr_count);
+		if (data->stack_a == first_rotated_node)
 			break ;
 	}
 }
