@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:40:56 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/01 20:01:49 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/01 22:48:49 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,10 @@ int	main(int argc, char *argv[])
 	puts("stack b:");
 	print_stack(data.stack_b);
 
+	push_back_to_a(&data);
+
 	free_nodes_in_stack(data.stack_a);
 	free_nodes_in_stack(data.stack_b);
 	free(data.staying_numbers);
 }
 
-	push_back_to_a(&(data.stack_a), &(data.stack_b), data.nr_count);

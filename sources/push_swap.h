@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/01 20:00:32 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/01 23:41:25 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ typedef struct s_stack
 	struct s_stack	*previous;
 	struct s_stack	*next;
 }	t_stack;
+
+typedef struct s_route
+{
+	size_t	pos_in_a;
+	size_t	pos_in_b;
+	size_t	len_a;
+	size_t	len_b;
+	size_t	price;
+	size_t	route_enum;
+} t_route;
 
 typedef struct s_data
 {
@@ -70,6 +80,8 @@ void		compare_and_prune(t_stack ***all_paths, t_stack **new_path);
 
 // algorithm
 void		push_all_to_b(t_data *data);
+void		push_back_to_a(t_data *data);
+void		define_cheapest_route(t_route *route_data, t_data *data);
 void		execute_operation(t_stack **stack_a, t_stack **stack_b,
 				char *command);
 
