@@ -6,11 +6,45 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/21 15:10:48 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/02 12:56:29 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/02 14:48:58 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	rotate_stack_a_smallest_to_top(t_data *data)
+{
+	size_t	first_node_pos;
+	size_t	stack_length;
+	t_stack *node_i;
+	size_t	i;
+
+	first_node_pos = 0;
+	stack_length = stack_len(data->stack_a);
+	node_i = data->stack_a;
+	while(node_i->index != 0)
+	{
+		first_node_pos++;
+		node_i = node_i->next;
+	}
+	i = 0;
+	if (first_node_pos < stack_length / 2)
+	{
+		while (i < first_node_pos)
+		{
+			execute_operation(&(data->stack_a), &(data->stack_b), "ra");
+			i++;
+		}
+	}
+	else
+	{
+		while (i < stack_length - first_node_pos)
+		{
+			execute_operation(&(data->stack_a), &(data->stack_b), "rra");
+			i++;
+		}
+	}
+}
 
 void	execute_cheapest_route(t_route *route_data, t_data *data)
 {

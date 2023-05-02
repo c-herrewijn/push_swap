@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/01 23:41:25 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/02 14:51:43 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ typedef struct s_data
 	t_stack	*stack_b;
 	t_stack	**staying_numbers;
 	size_t	nr_count;
-	// optionally add:
-	// size_t	len_a;
-	// size_t	len_b;
-	// size_t	nr_of_staying_numbers;
 } t_data;
 
 // parsing
@@ -84,6 +80,7 @@ void		push_back_to_a(t_data *data);
 void		define_cheapest_route(t_route *route_data, t_data *data);
 void		execute_operation(t_stack **stack_a, t_stack **stack_b,
 				char *command);
+void		rotate_stack_a_smallest_to_top(t_data *data);
 
 // stack utils
 t_stack		*stack_get_last(t_stack *stack);
