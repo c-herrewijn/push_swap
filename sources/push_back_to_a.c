@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/21 15:10:48 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/02 17:01:08 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/02 17:16:12 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	rotate_stack_a_smallest_to_top(t_data *data)
 		execute_operation_n_times(data, "rra", stack_length - first_node_pos);
 }
 
-void	execute_cheapest_route(t_route *route_data, t_data *data)
+static void	execute_route_same_direction(t_route *route_data, t_data *data)
 {
 	size_t	pos_a;
 	size_t	pos_b;
@@ -44,10 +44,30 @@ void	execute_cheapest_route(t_route *route_data, t_data *data)
 	pos_b = route_data->pos_in_b;
 	if (route_data->route_enum == 0)
 	{
-		execute_operation_n_times(data, "rr", ft_min(pos_a, pos_b));
-		execute_operation_n_times(data, "ra", pos_a - ft_min(pos_a, pos_b));
-		execute_operation_n_times(data, "rb", pos_b - ft_min(pos_a, pos_b));
+		nr_double_rotations = ft_min(pos_a, pos_b);
+		execute_operation_n_times(data, "rr", nr_double_rotations);
+		execute_operation_n_times(data, "ra", pos_a - nr_double_rotations);
+		execute_operation_n_times(data, "rb", pos_b - nr_double_rotations);
 	}
+	if (route_data->route_enum == 3)
+	{
+		nr_double_rotations = ft_min(route_data->len_a
+				- pos_a, route_data->len_b - pos_b);
+		execute_operation_n_times(data, "rrr", nr_double_rotations);
+		execute_operation_n_times(data, "rra",
+			route_data->len_a - pos_a - nr_double_rotations);
+		execute_operation_n_times(data, "rrb",
+			route_data->len_b - pos_b - nr_double_rotations);
+	}
+}
+
+static void	execute_route_opposing_direction(t_route *route_data, t_data *data)
+{
+	size_t	pos_a;
+	size_t	pos_b;
+
+	pos_a = route_data->pos_in_a;
+	pos_b = route_data->pos_in_b;
 	if (route_data->route_enum == 1)
 	{
 		execute_operation_n_times(data, "ra", pos_a);
@@ -58,13 +78,14 @@ void	execute_cheapest_route(t_route *route_data, t_data *data)
 		execute_operation_n_times(data, "rra", route_data->len_a - pos_a);
 		execute_operation_n_times(data, "rb", pos_b);
 	}
-	if (route_data->route_enum == 3)
-	{
-		nr_double_rotations = ft_min(route_data->len_a - pos_a, route_data->len_b - pos_b);
-		execute_operation_n_times(data, "rrr", nr_double_rotations);
-		execute_operation_n_times(data, "rra", route_data->len_a - pos_a - nr_double_rotations);
-		execute_operation_n_times(data, "rrb", route_data->len_b - pos_b - nr_double_rotations);
-	}
+}
+
+static void	execute_cheapest_route(t_route *route_data, t_data *data)
+{
+	if (route_data->route_enum == 0 || route_data->route_enum == 3)
+		execute_route_same_direction(route_data, data);
+	if (route_data->route_enum == 1 || route_data->route_enum == 2)
+		execute_route_opposing_direction(route_data, data);
 	execute_operation(data, "pa");
 }
 
