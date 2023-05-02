@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/01 18:31:13 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/02 13:44:48 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/02 15:40:49 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ static void	update_cheapest_route(t_route *route_data, t_data *data,
 	price_option = ft_max(rotation_dist_stack_a_up, pos_in_b);
 	if (price_option < route_data->price)
 		set_price_and_route(route_data, price_option, 0);
-	price_option = rotation_dist_stack_a_up + (route_data->len_b - pos_in_b - 1);
+	price_option = rotation_dist_stack_a_up + (route_data->len_b
+			- pos_in_b - 1);
 	if (price_option < route_data->price)
 		set_price_and_route(route_data, price_option, 1);
 	price_option = rotation_dist_stack_a_down + pos_in_b;
@@ -111,7 +112,7 @@ void	define_cheapest_route(t_route *route_data, t_data *data)
 	i = 0;
 	node_from_top = data->stack_b;
 	node_from_bottom = data->stack_b->previous;
-	while (i < (route_data->len_b / 2) && i < route_data->price)
+	while (i < (route_data->len_b / 2 + 1) && i < route_data->price)
 	{
 		update_cheapest_route(route_data, data, node_from_top, i);
 		update_cheapest_route(route_data, data, node_from_bottom,
