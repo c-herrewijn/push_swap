@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:40:56 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/02 14:51:10 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/02 15:49:41 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,9 @@ int	main(int argc, char *argv[])
 	if (data.staying_numbers == NULL)
 		exit_with_error(data.stack_a, data.stack_b);
 	push_all_to_b(&data);
-
-	// debug
-	// printf("str: %s\n", str_from_bfs_path(data.staying_numbers));
-	// puts("stack a:");
-	// print_stack(data.stack_a);
-	// puts("stack b:");
-	// print_stack(data.stack_b);
 	push_back_to_a(&data);
 	rotate_stack_a_smallest_to_top(&data);
-	// rotate_smallest_to_top(&(data.stack_a));
-
-
-
-
-	// todo rotate smallest to top
 	free_nodes_in_stack(data.stack_a);
 	free_nodes_in_stack(data.stack_b);
 	free(data.staying_numbers);
 }
-

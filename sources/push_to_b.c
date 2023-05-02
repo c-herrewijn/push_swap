@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/21 15:09:40 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/01 20:03:02 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/02 16:24:56 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ static int	get_rotation_distance_grp(t_stack *stack, size_t group_bottom,
 	}
 }
 
-static void	rotate_b(t_stack **stack_b, int rotation_distance)
+static void	rotate_b(t_data *data, int rotation_distance)
 {
 	if (rotation_distance < 0)
 	{
 		while (rotation_distance < 0)
 		{
-			execute_operation(NULL, stack_b, "rrb");
+			execute_operation(data, "rrb");
 			rotation_distance++;
 		}
 	}
@@ -67,15 +67,14 @@ static void	rotate_b(t_stack **stack_b, int rotation_distance)
 	{
 		while (rotation_distance > 0)
 		{
-			execute_operation(NULL, stack_b, "rb");
+			execute_operation(data, "rb");
 			rotation_distance--;
 		}
 	}
 }
 
 // rotation_distance: positive number is up, negative number is down
-static void	initial_push_to_b(t_stack **stack_a, t_stack **stack_b,
-	size_t nr_count)
+static void	initial_push_to_b(t_data *data)
 {
 	int		rotation_distance;
 	size_t	group_1_start;
@@ -84,17 +83,17 @@ static void	initial_push_to_b(t_stack **stack_a, t_stack **stack_b,
 	size_t	group_2_end;
 
 	group_1_start = 0;
-	group_1_end = (nr_count / 2) - 1;
-	group_2_start = nr_count / 2;
-	group_2_end = nr_count - 1;
-	if ((*stack_a)->index <= group_1_end)
-		rotation_distance = get_rotation_distance_grp(*stack_b, group_1_start,
-				group_1_end);
+	group_1_end = (data->nr_count / 2) - 1;
+	group_2_start = data->nr_count / 2;
+	group_2_end = data->nr_count - 1;
+	if (data->stack_a->index <= group_1_end)
+		rotation_distance = get_rotation_distance_grp(data->stack_b,
+				group_1_start, group_1_end);
 	else
-		rotation_distance = get_rotation_distance_grp(*stack_b, group_2_start,
-				group_2_end);
-	rotate_b(stack_b, rotation_distance);
-	execute_operation(stack_a, stack_b, "pb");
+		rotation_distance = get_rotation_distance_grp(data->stack_b,
+				group_2_start, group_2_end);
+	rotate_b(data, rotation_distance);
+	execute_operation(data, "pb");
 }
 
 void	push_all_to_b(t_data *data)
@@ -111,11 +110,10 @@ void	push_all_to_b(t_data *data)
 		{
 			if (first_rotated_node == NULL)
 				first_rotated_node = data->stack_a;
-			execute_operation(&(data->stack_a), &(data->stack_b), "ra");
+			execute_operation(data, "ra");
 		}
 		else
-			initial_push_to_b(&(data->stack_a), &(data->stack_b),
-				data->nr_count);
+			initial_push_to_b(data);
 		if (data->stack_a == first_rotated_node)
 			break ;
 	}

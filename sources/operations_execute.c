@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/21 19:17:23 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/27 19:14:50 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/02 16:24:01 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,13 @@ static void	execute_rotate(t_stack **stack_a, t_stack **stack_b, char *command)
 	}
 }
 
-void	execute_operation(t_stack **stack_a, t_stack **stack_b, char *command)
+void	execute_operation(t_data *data, char *command)
 {
+	t_stack	**stack_a;
+	t_stack	**stack_b;
+
+	stack_a = &(data->stack_a);
+	stack_b = &(data->stack_b);
 	if (ft_strncmp(command, "p", 1) == 0)
 		execute_push(stack_a, stack_b, command);
 	if (ft_strncmp(command, "s", 1) == 0)
@@ -65,4 +70,16 @@ void	execute_operation(t_stack **stack_a, t_stack **stack_b, char *command)
 		execute_rotate(stack_a, stack_b, command);
 	write(1, command, ft_strlen(command));
 	write(1, "\n", 1);
+}
+
+void	execute_operation_n_times(t_data *data,	char *command, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		execute_operation(data, command);
+		i++;
+	}
 }

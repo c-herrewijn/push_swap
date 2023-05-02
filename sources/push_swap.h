@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/02 14:51:43 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/02 16:17:02 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_route
 	size_t	len_b;
 	size_t	price;
 	size_t	route_enum;
-} t_route;
+}	t_route;
 
 typedef struct s_data
 {
@@ -44,7 +44,7 @@ typedef struct s_data
 	t_stack	*stack_b;
 	t_stack	**staying_numbers;
 	size_t	nr_count;
-} t_data;
+}	t_data;
 
 // parsing
 int			parse_input(int argc, char *argv[], t_stack **stack_a);
@@ -54,6 +54,8 @@ void		normalize_input(t_stack *stack);
 void		push(t_stack **push_to_stack, t_stack **take_from_stack);
 void		swap(t_stack **stack);
 void		rotate(t_stack **stack, char c);
+void		execute_operation(t_data *data, char *command);
+void		execute_operation_n_times(t_data *data,	char *command, size_t n);
 
 // breadth first search
 t_stack		**get_staying_numbers(t_stack *stack_a, size_t nr_count);
@@ -76,10 +78,8 @@ void		compare_and_prune(t_stack ***all_paths, t_stack **new_path);
 
 // algorithm
 void		push_all_to_b(t_data *data);
-void		push_back_to_a(t_data *data);
 void		define_cheapest_route(t_route *route_data, t_data *data);
-void		execute_operation(t_stack **stack_a, t_stack **stack_b,
-				char *command);
+void		push_back_to_a(t_data *data);
 void		rotate_stack_a_smallest_to_top(t_data *data);
 
 // stack utils
