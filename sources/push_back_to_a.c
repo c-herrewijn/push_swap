@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/21 15:10:48 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/02 16:27:04 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/02 17:01:08 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	rotate_stack_a_smallest_to_top(t_data *data)
 {
 	size_t	first_node_pos;
 	size_t	stack_length;
-	t_stack *node_i;
+	t_stack	*node_i;
 	size_t	i;
 
 	first_node_pos = 0;
 	stack_length = stack_len(data->stack_a);
 	node_i = data->stack_a;
-	while(node_i->index != 0)
+	while (node_i->index != 0)
 	{
 		first_node_pos++;
 		node_i = node_i->next;
@@ -38,94 +38,39 @@ void	execute_cheapest_route(t_route *route_data, t_data *data)
 {
 	size_t	pos_a;
 	size_t	pos_b;
+	size_t	nr_double_rotations;
 
 	pos_a = route_data->pos_in_a;
 	pos_b = route_data->pos_in_b;
 	if (route_data->route_enum == 0)
 	{
-		while (pos_a > 0 || pos_b > 0)
-		{
-			if (pos_a > 0 && pos_b > 0)
-			{
-				execute_operation(data, "rr");
-				pos_a--;
-				pos_b--;
-			}
-			if (pos_a > 0 && pos_b == 0)
-			{
-				execute_operation(data, "ra");
-				pos_a--;
-			}
-			if (pos_a == 0 && pos_b > 0)
-			{
-				execute_operation(data, "rb");
-				pos_b--;
-			}
-		}
-		execute_operation(data, "pa");
+		execute_operation_n_times(data, "rr", ft_min(pos_a, pos_b));
+		execute_operation_n_times(data, "ra", pos_a - ft_min(pos_a, pos_b));
+		execute_operation_n_times(data, "rb", pos_b - ft_min(pos_a, pos_b));
 	}
-			
 	if (route_data->route_enum == 1)
 	{
-		while (pos_a > 0 || pos_b < route_data->len_b)
-		{			
-			if (pos_a > 0)
-			{
-				execute_operation(data, "ra");
-				pos_a--;
-			}
-			if (pos_b < route_data->len_b)
-			{
-				execute_operation(data, "rrb");
-				pos_b++;
-			}
-		}
-		execute_operation(data, "pa");
+		execute_operation_n_times(data, "ra", pos_a);
+		execute_operation_n_times(data, "rrb", route_data->len_b - pos_b);
 	}
-
 	if (route_data->route_enum == 2)
 	{
-		while (pos_a < route_data->len_a || pos_b > 0)
-		{
-			if (pos_a < route_data->len_a)
-			{
-				execute_operation(data, "rra");
-				pos_a++;
-			}
-			if (pos_b > 0)
-			{
-				execute_operation(data, "rb");
-				pos_b--;
-			}
-		}
-		execute_operation(data, "pa");
+		execute_operation_n_times(data, "rra", route_data->len_a - pos_a);
+		execute_operation_n_times(data, "rb", pos_b);
 	}
-
 	if (route_data->route_enum == 3)
 	{
-		while (pos_a < route_data->len_a && pos_b < route_data->len_b)
-		{
-			execute_operation(data, "rrr");
-			pos_a++;
-			pos_b++;
-		}
-		while (pos_a < route_data->len_a)
-		{
-			execute_operation(data, "rra");
-			pos_a++;
-		}
-		while (pos_b < route_data->len_b)
-		{
-			execute_operation(data, "rrb");
-			pos_b++;
-		}
-		execute_operation(data, "pa");
+		nr_double_rotations = ft_min(route_data->len_a - pos_a, route_data->len_b - pos_b);
+		execute_operation_n_times(data, "rrr", nr_double_rotations);
+		execute_operation_n_times(data, "rra", route_data->len_a - pos_a - nr_double_rotations);
+		execute_operation_n_times(data, "rrb", route_data->len_b - pos_b - nr_double_rotations);
 	}
+	execute_operation(data, "pa");
 }
 
 void	push_back_to_a(t_data *data)
 {
-	t_route route_data;
+	t_route	route_data;
 	size_t	len_a;
 	size_t	len_b;
 
