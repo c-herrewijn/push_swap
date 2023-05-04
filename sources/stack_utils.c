@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/12 16:36:29 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/21 20:31:46 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/04 19:07:03 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,23 @@ void	free_nodes_in_stack(t_stack *stack)
 		if (stack == first)
 			break ;
 	}
+}
+
+/*
+assumes the linked list is circular
+*/
+bool	stack_is_ordered(t_stack *stack)
+{
+	t_stack	*first;
+
+	first = stack;
+	while (true)
+	{
+		if (stack->next == first)
+			break ;
+		if (stack->index > stack->next->index)
+			return (false);
+		stack = stack->next;
+	}
+	return (true);
 }
