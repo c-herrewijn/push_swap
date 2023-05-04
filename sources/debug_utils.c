@@ -1,9 +1,22 @@
 #include "push_swap.h"
 
+void print_nr_of_paths(t_stack ***all_paths)
+{
+	int	i;
+
+	i = 0;
+	while (all_paths[i] != NULL)
+		i++;
+	printf("nr of paths: %d\n", i);
+}
+
 void print_all_bfs_paths(t_stack ***all_paths)
 {
 	int i;
 	int j;
+
+	if (all_paths[0] == NULL)
+		puts("no bfs paths");
 
 	i = 0;
 	while (all_paths[i] != NULL)

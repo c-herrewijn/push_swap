@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/02 16:17:02 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/04 16:01:44 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <assert.h>
 # include "../libft/libft.h"
+# include <time.h>
 
 typedef struct s_stack
 {
@@ -44,6 +45,7 @@ typedef struct s_data
 	t_stack	*stack_b;
 	t_stack	**staying_numbers;
 	size_t	nr_count;
+	size_t	nr_staying_numbers;
 }	t_data;
 
 // parsing
@@ -58,9 +60,9 @@ void		execute_operation(t_data *data, char *command);
 void		execute_operation_n_times(t_data *data,	char *command, size_t n);
 
 // breadth first search
-t_stack		**get_staying_numbers(t_stack *stack_a, size_t nr_count);
+t_stack		**get_staying_numbers(t_data *data);
 t_stack		**add_new_path(t_stack ***all_paths, size_t nr_count);
-void		add_node_to_path(t_stack **path, t_stack *node);
+void		add_node_to_path(t_stack **path, t_stack *node, t_data *data);
 int			duplicate_path(t_stack ***all_paths, t_stack **path_to_copy,
 				size_t nr_count);
 bool		can_be_added_to_path(t_stack **path, t_stack *node);
@@ -93,5 +95,6 @@ char		*str_from_stack(t_stack *stack);
 char		*str_from_bfs_path(t_stack **path);
 void		print_bfs_path(t_stack **path);
 void		print_all_bfs_paths(t_stack ***all_paths);
+void		print_nr_of_paths(t_stack ***all_paths);
 
 #endif

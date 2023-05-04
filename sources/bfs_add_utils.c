@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/18 13:01:00 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/26 15:20:00 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/03 22:16:51 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ t_stack	**add_new_path(t_stack ***all_paths, size_t nr_count)
 	return (all_paths[i]);
 }
 
-void	add_node_to_path(t_stack **path, t_stack *node)
+void	add_node_to_path(t_stack **path, t_stack *node, t_data *data)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (path[i] != NULL)
 		i++;
 	path[i] = node;
+	if (i + 1 > data->nr_staying_numbers)
+		data->nr_staying_numbers = i + 1;
 }
 
 int	duplicate_path(t_stack ***all_paths, t_stack **path_to_copy,
