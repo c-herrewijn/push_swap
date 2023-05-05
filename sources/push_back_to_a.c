@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/21 15:10:48 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/02 17:16:12 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/04 17:03:49 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	rotate_stack_a_smallest_to_top(t_data *data)
 		node_i = node_i->next;
 	}
 	i = 0;
-	if (first_node_pos < stack_length / 2)
+	if (first_node_pos <= stack_length / 2)
 		execute_operation_n_times(data, "ra", first_node_pos);
 	else
 		execute_operation_n_times(data, "rra", stack_length - first_node_pos);

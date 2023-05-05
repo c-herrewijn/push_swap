@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:40:56 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/02 15:49:41 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/05 15:03:14 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,17 @@ int	main(int argc, char *argv[])
 		exit_with_error(data.stack_a, data.stack_b);
 	data.nr_count = argc - 1;
 	normalize_input(data.stack_a);
-	data.staying_numbers = get_staying_numbers(data.stack_a, data.nr_count);
-	if (data.staying_numbers == NULL)
-		exit_with_error(data.stack_a, data.stack_b);
-	push_all_to_b(&data);
-	push_back_to_a(&data);
-	rotate_stack_a_smallest_to_top(&data);
+	if (data.nr_count < 8)
+		small_nr_sort(&data);
+	else
+	{
+		data.staying_numbers = get_staying_numbers(&data);
+		if (data.staying_numbers == NULL)
+			exit_with_error(data.stack_a, data.stack_b);
+		push_all_to_b(&data);
+		free(data.staying_numbers);
+		push_back_to_a(&data);
+		rotate_stack_a_smallest_to_top(&data);
+	}
 	free_nodes_in_stack(data.stack_a);
-	free_nodes_in_stack(data.stack_b);
-	free(data.staying_numbers);
 }

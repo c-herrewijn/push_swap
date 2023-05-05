@@ -6,3 +6,4 @@ visualizer/*
 .vscode
 *.out
 temp.c
+checker_Mac

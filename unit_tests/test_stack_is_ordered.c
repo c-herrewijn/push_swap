@@ -51,4 +51,37 @@ void test_stack_is_orderd(void)
 	assert(stack_is_ordered(stack_5) == false);
 
 	puts("test_stack_is_ordered OK");
+
+	assert(stack_is_circularly_ordered(stack_1, stack_get_smallest(stack_1), stack_get_largest(stack_1)) == true); 
+	assert(stack_is_circularly_ordered(stack_2, stack_get_smallest(stack_2), stack_get_largest(stack_2)) == false); 
+	assert(stack_is_circularly_ordered(stack_3, stack_get_smallest(stack_3), stack_get_largest(stack_3)) == true); 
+	assert(stack_is_circularly_ordered(stack_4, stack_get_smallest(stack_4), stack_get_largest(stack_4)) == true); 
+	assert(stack_is_circularly_ordered(stack_5, stack_get_smallest(stack_5), stack_get_largest(stack_5)) == true); 
+	
+	t_stack	*stack_6;
+	stack_6 = NULL;
+	char	*argv_6[6] = {"dummy", "22", "33", "0", "11", NULL};
+	argc = 5;
+	parse_input(argc, argv_6, &stack_6);
+	normalize_input(stack_6);
+	assert(stack_is_circularly_ordered(stack_6, stack_get_smallest(stack_6), stack_get_largest(stack_6)) == true); 
+	
+	t_stack	*stack_7;
+	stack_7 = NULL;
+	char	*argv_7[6] = {"dummy", "1", "3", "0", "2", NULL};
+	argc = 5;
+	parse_input(argc, argv_7, &stack_7);
+	normalize_input(stack_7);
+	assert(stack_is_circularly_ordered(stack_7, stack_get_smallest(stack_7), stack_get_largest(stack_7)) == false); 
+	
+	
+	t_stack	*stack_8;
+	stack_8 = NULL;
+	char	*argv_8[5] = {"dummy", "1", "2", "0", NULL};
+	argc = 4;
+	parse_input(argc, argv_8, &stack_8);
+	normalize_input(stack_8);
+	assert(stack_is_circularly_ordered(stack_8, stack_get_smallest(stack_8), stack_get_largest(stack_8)) == true); 
+	
+	puts("test_stack_is_circularly_ordered OK");
 }

@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/04 16:01:44 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/05 12:55:06 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,22 @@ void		remove_path(t_stack ***all_paths, t_stack **path);
 void		compare_and_prune(t_stack ***all_paths, t_stack **new_path);
 
 // algorithm
+void		initial_swap(t_data *data);
 void		push_all_to_b(t_data *data);
 void		define_cheapest_route(t_route *route_data, t_data *data);
 void		push_back_to_a(t_data *data);
 void		rotate_stack_a_smallest_to_top(t_data *data);
+void		small_nr_sort(t_data *data);
 
 // stack utils
 t_stack		*stack_get_last(t_stack *stack);
 void		free_nodes_in_stack(t_stack *stack);
 size_t		stack_len(t_stack *stack);
+bool		stack_is_ordered(t_stack *stack);
+bool		stack_is_circularly_ordered(t_stack *stack, size_t smallest,
+				size_t largest);
+size_t		stack_get_smallest(t_stack *stack);
+size_t		stack_get_largest(t_stack *stack);
 
 // debug
 void		print_stack(t_stack *stack);
