@@ -33,7 +33,7 @@ re: fclean all
 test: test.out
 	@./test.out
 	@rm ./unit_tests/*.o
-	@rm test.out
+	# @rm test.out
 
 TEST_SRCS = run_tests.c test_bfs.c test_isinteger.c test_basic_operations.c test_get_staying_numbers.c test_ft_abs.c test_stack_is_ordered.c
 TEST_OBJS = $(addprefix unit_tests/, $(TEST_SRCS:.c=.o))
