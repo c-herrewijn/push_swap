@@ -15,7 +15,6 @@ void test_stack_is_orderd(void)
 	normalize_input(stack_1);
 	assert(stack_is_ordered(stack_1) == true); 
 
-
 	t_stack	*stack_2;
 	stack_2 = NULL;
 	char	*argv_2[6] = {"dummy", "11", "22", "44", "33", NULL};
@@ -25,13 +24,14 @@ void test_stack_is_orderd(void)
 	assert(stack_is_ordered(stack_2) == false); 
 
 
-	t_stack	*stack_3;
-	stack_3 = NULL;
-	char	*argv_3[3] = {"dummy", "11", NULL};
-	argc = 2;
-	parse_input(argc, argv_3, &stack_3, &data);
-	normalize_input(stack_3);
-	assert(stack_is_ordered(stack_3) == true); 
+	// NOTE: test case removed because program exits directly if there in only 1 integer arg (no sorting needed)
+	// t_stack	*stack_3;
+	// stack_3 = NULL;
+	// char	*argv_3[3] = {"dummy", "11", NULL};
+	// argc = 2;
+	// parse_input(argc, argv_3, &stack_3, &data);
+	// normalize_input(stack_3);
+	// assert(stack_is_ordered(stack_3) == true); 
 
 
 	t_stack	*stack_4;
@@ -55,7 +55,7 @@ void test_stack_is_orderd(void)
 
 	assert(stack_is_circularly_ordered(stack_1, stack_get_smallest(stack_1), stack_get_largest(stack_1)) == true); 
 	assert(stack_is_circularly_ordered(stack_2, stack_get_smallest(stack_2), stack_get_largest(stack_2)) == false); 
-	assert(stack_is_circularly_ordered(stack_3, stack_get_smallest(stack_3), stack_get_largest(stack_3)) == true); 
+	// assert(stack_is_circularly_ordered(stack_3, stack_get_smallest(stack_3), stack_get_largest(stack_3)) == true); 
 	assert(stack_is_circularly_ordered(stack_4, stack_get_smallest(stack_4), stack_get_largest(stack_4)) == true); 
 	assert(stack_is_circularly_ordered(stack_5, stack_get_smallest(stack_5), stack_get_largest(stack_5)) == true); 
 	
@@ -75,7 +75,7 @@ void test_stack_is_orderd(void)
 	normalize_input(stack_7);
 	assert(stack_is_circularly_ordered(stack_7, stack_get_smallest(stack_7), stack_get_largest(stack_7)) == false); 
 	
-	
+
 	t_stack	*stack_8;
 	stack_8 = NULL;
 	char	*argv_8[5] = {"dummy", "1", "2", "0", NULL};
