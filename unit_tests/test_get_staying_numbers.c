@@ -12,20 +12,20 @@ void test_get_staying_numbers(void)
 	argc = 16;
 	data.nr_count = argc - 1;
 	data.stack_a = NULL;
-	parse_input(argc, argv_1, &(data.stack_a));
+	parse_input(argc, argv_1, &(data.stack_a), &data);
 	normalize_input(data.stack_a);
 	data.staying_numbers = get_staying_numbers(&data);
-	printf("str: %s\n", str_from_bfs_path(data.staying_numbers));
+	// printf("str: %s\n", str_from_bfs_path(data.staying_numbers));
 	assert(ft_strncmp("0 1 2 5 7 13 ", str_from_bfs_path(data.staying_numbers), 13) == 0);
 	
 	char	*argv_2[12] = {"dummy", "3", "4", "5", "6", "9", "10", "7", "8", "0", "1", "2"};
 	argc = 12;
 	data.stack_a = NULL;
-	parse_input(argc, argv_2, &(data.stack_a));
+	parse_input(argc, argv_2, &(data.stack_a), &data);
 	normalize_input(data.stack_a);
 	data.nr_count = argc - 1;
 	data.staying_numbers = get_staying_numbers(&data);
-	printf("str: %s\n", str_from_bfs_path(data.staying_numbers));
+	// printf("str: %s\n", str_from_bfs_path(data.staying_numbers));
 	assert(ft_strncmp("3 4 5 6 7 8 0 1 2 ", str_from_bfs_path(data.staying_numbers), 18) == 0);
 
 	puts("test_get_staying_numbers OK");

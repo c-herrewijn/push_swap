@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/13 16:32:57 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/21 13:41:56 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/05 17:10:09 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	normalize_input(t_stack *stack)
 }
 
 // assumes there is no circular reference in the stack yet
-static int	add_new_to_stack(int num, t_stack **stack)
+int	add_new_to_stack(int num, t_stack **stack)
 {
 	t_stack	*new;
 	t_stack	*last;
@@ -62,20 +62,31 @@ static int	add_new_to_stack(int num, t_stack **stack)
 	return (0);
 }
 
-int	parse_input(int argc, char *argv[], t_stack **stack_a)
+int	parse_input(int argc, char *argv[], t_stack **stack_a, t_data *data)
 {
 	t_stack	*last;
 	int		i;
 
-	i = 1;
-	while (i < argc)
-	{	
-		if (add_new_to_stack(ft_atoi(argv[i]), stack_a) < 0)
+	if (argc == 2)
+	{
+		if (ft_isinteger(argv[1]) == true)
+			exit(0);
+		if (validate_and_parse_spaced_numbers(argv[1], stack_a, data) < 0)
 			return (-1);
-		i++;
 	}
-	last = stack_get_last(*stack_a);
-	last->next = *stack_a;
-	(*stack_a)->previous = last;
+	else
+	{
+		i = 1;
+		while (i < argc)
+		{	
+			if (add_new_to_stack(ft_atoi(argv[i]), stack_a) < 0)
+				return (-1);
+			i++;
+		}
+		last = stack_get_last(*stack_a);
+		last->next = *stack_a;
+		(*stack_a)->previous = last;
+		data->nr_count = argc - 1;
+	}
 	return (0);
 }

@@ -6,12 +6,13 @@ void test_basic_operations(void)
 	// create stack
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	t_data	data;
 	
 	stack_b = NULL;
 	char	*argv[5] = {"dummy", "11", "22", "33", "44"};
 	int		argc = 5;
 	
-	parse_input(argc, argv, &stack_a);
+	parse_input(argc, argv, &stack_a, &data);
 	assert(ft_strncmp("11 22 33 44 ", str_from_stack(stack_a), 12) == 0);
 
 	// swap stack of 4

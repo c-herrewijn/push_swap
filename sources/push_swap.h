@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/05 12:55:06 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/05 17:10:27 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ typedef struct s_data
 }	t_data;
 
 // parsing
-int			parse_input(int argc, char *argv[], t_stack **stack_a);
+int			parse_input(int argc, char *argv[], t_stack **stack_a,
+				t_data *data);
+int			validate_and_parse_spaced_numbers(char *str, t_stack **stack_a,
+				t_data *data);
+int			add_new_to_stack(int num, t_stack **stack);
 void		normalize_input(t_stack *stack);
 
 // operations
