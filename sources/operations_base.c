@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   operations.c                                       :+:    :+:            */
+/*   operations_base.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/13 20:43:44 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/21 13:41:33 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/09 15:08:40 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	adjust_push_to_stack(t_stack **push_to_stack, t_stack *moving_item)
 		(moving_item)->previous = moving_item;
 	}
 	else
-	{	
+	{
 		(moving_item)->next = *push_to_stack;
 		(moving_item)->previous = (*push_to_stack)->previous;
 		(*push_to_stack)->previous->next = moving_item;
@@ -75,7 +75,7 @@ void	swap(t_stack **stack)
 	third = second->next;
 	last = first->previous;
 	if (first->next->next != first)
-	{	
+	{
 		first->next = third;
 		third->previous = first;
 		second->next = first;

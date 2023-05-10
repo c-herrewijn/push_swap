@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/13 16:32:57 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/05 17:10:09 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/09 15:08:44 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	parse_input(int argc, char *argv[], t_stack **stack_a, t_data *data)
 	{
 		i = 1;
 		while (i < argc)
-		{	
+		{
 			if (add_new_to_stack(ft_atoi(argv[i]), stack_a) < 0)
 				return (-1);
 			i++;

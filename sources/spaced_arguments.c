@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/05 16:07:31 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/09 13:14:37 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/09 15:08:47 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	parse_spaced_numbers(char **arr, t_stack **stack_a)
 
 	i = 0;
 	while (arr[i] != NULL)
-	{	
+	{
 		if (add_new_to_stack(ft_atoi(arr[i]), stack_a) < 0)
 			return (-1);
 		i++;
