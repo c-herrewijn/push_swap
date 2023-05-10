@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:40:56 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/09 13:11:18 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/10 15:05:41 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static bool	is_valid_input(int argc, char *argv[])
 
 	i = 1;
 	if (argc < 2)
-		return (false);
+		exit(0);
 	if (argc > 2)
 	{
 		while (i < argc)
