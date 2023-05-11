@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/11 11:41:20 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/05 17:10:27 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/11 16:52:03 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,21 @@ typedef struct s_data
 // parsing
 int			parse_input(int argc, char *argv[], t_stack **stack_a,
 				t_data *data);
+bool		is_valid_input(int argc, char *argv[]);
 int			validate_and_parse_spaced_numbers(char *str, t_stack **stack_a,
 				t_data *data);
 int			add_new_to_stack(int num, t_stack **stack);
 void		normalize_input(t_stack *stack);
+void		exit_with_error(t_stack *stack_a, t_stack *stack_b);
 
 // operations
 void		push(t_stack **push_to_stack, t_stack **take_from_stack);
 void		swap(t_stack **stack);
 void		rotate(t_stack **stack, char c);
+void		execute_push(t_stack **stack_a, t_stack **stack_b, char *command);
+void		execute_swap(t_stack **stack_a, t_stack **stack_b, char *command);
+void		execute_rotate(t_stack **stack_a, t_stack **stack_b,
+				char *command);
 void		execute_operation(t_data *data, char *command);
 void		execute_operation_n_times(t_data *data,	char *command, size_t n);
 

@@ -1,10 +1,17 @@
 NAME = push_swap
-# FLAGS = -Wall -Werror -Wextra
-FLAGS = -Wall -Wextra -g
+NAME_BONUS = checker
+FLAGS = -Wall -Werror -Wextra
 SRC_DIR = sources
-SRCS = bfs_add_utils.c bfs_cleanup.c bfs_length_utils.c bfs_prune.c breadth_first_search.c define_cheapest_route.c debug_utils.c main.c operations_base.c operations_execute.c parsing.c push_back_to_a.c push_to_b.c small_sets.c spaced_arguments.c stack_utils.c
+SRC_BONUS_DIR = sources_bonus
+SRCS = 	bfs_add_utils.c bfs_cleanup.c bfs_length_utils.c bfs_prune.c \
+		breadth_first_search.c define_cheapest_route.c main.c \
+		operations_base.c operations_execute.c parsing.c push_back_to_a.c \
+		push_to_b.c small_sets.c spaced_arguments.c stack_utils.c validations.c
+SRCS_BONUS = 	checker_bonus.c operations_execute.c operations_base.c \
+				validations.c parsing.c stack_utils.c spaced_arguments.c debug_utils.c
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+OBJS_BONUS = $(addprefix $(OBJ_DIR)/, $(SRCS_BONUS:.c=.o))
 LIBFT_DIR = libft
 LIBFTNAME = libft.a
 
@@ -17,6 +24,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) -c $(FLAGS) $< -o $@
 
+$(OBJ_DIR)/%.o: $(SRC_BONUS_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) -c $(FLAGS) $< -o $@
+
 $(LIBFT_DIR)/$(LIBFTNAME):
 	@$(MAKE) -C $(LIBFT_DIR) bonus
 
@@ -26,9 +37,15 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(NAME_BONUS)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
+
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJS_BONUS) $(LIBFT_DIR)/$(LIBFTNAME)
+	$(CC) $(FLAGS) $^ -o $(NAME_BONUS)
 
 test: test.out
 	@./test.out
@@ -38,7 +55,7 @@ test: test.out
 TEST_SRCS = run_tests.c test_bfs.c test_isinteger.c test_basic_operations.c test_get_staying_numbers.c test_ft_abs.c test_stack_is_ordered.c
 TEST_OBJS = $(addprefix unit_tests/, $(TEST_SRCS:.c=.o))
 
-BASE_SRCS = bfs_add_utils.c bfs_cleanup.c bfs_length_utils.c bfs_prune.c breadth_first_search.c define_cheapest_route.c debug_utils.c operations_base.c operations_execute.c parsing.c push_back_to_a.c push_to_b.c spaced_arguments.c small_sets.c stack_utils.c
+BASE_SRCS = bfs_add_utils.c bfs_cleanup.c bfs_length_utils.c bfs_prune.c breadth_first_search.c define_cheapest_route.c debug_utils.c operations_base.c operations_execute.c parsing.c push_back_to_a.c push_to_b.c spaced_arguments.c small_sets.c stack_utils.c validations.c
 BASE_OBJS = $(addprefix $(OBJ_DIR)/, $(BASE_SRCS:.c=.o))
 
 unit_tests/%.o: unit_tests/%.c
@@ -48,4 +65,4 @@ unit_tests/%.o: unit_tests/%.c
 test.out: $(TEST_OBJS) $(BASE_OBJS) $(LIBFT_DIR)/$(LIBFTNAME)
 	@$(CC) $(FLAGS) $^ -o test.out
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re bonus test

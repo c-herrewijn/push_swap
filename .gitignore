@@ -7,3 +7,4 @@ visualizer/*
 *.out
 temp.c
 checker_Mac
+checker

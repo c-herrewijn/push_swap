@@ -6,13 +6,13 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/21 19:17:23 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/02 16:24:01 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/11 16:50:46 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	execute_push(t_stack **stack_a, t_stack **stack_b, char *command)
+void	execute_push(t_stack **stack_a, t_stack **stack_b, char *command)
 {
 	if (ft_strncmp(command, "pa", 2) == 0)
 		push(stack_a, stack_b);
@@ -20,7 +20,7 @@ static void	execute_push(t_stack **stack_a, t_stack **stack_b, char *command)
 		push(stack_b, stack_a);
 }
 
-static void	execute_swap(t_stack **stack_a, t_stack **stack_b, char *command)
+void	execute_swap(t_stack **stack_a, t_stack **stack_b, char *command)
 {
 	if (ft_strncmp(command, "sa", 2) == 0)
 		swap(stack_a);
@@ -33,7 +33,7 @@ static void	execute_swap(t_stack **stack_a, t_stack **stack_b, char *command)
 	}
 }
 
-static void	execute_rotate(t_stack **stack_a, t_stack **stack_b, char *command)
+void	execute_rotate(t_stack **stack_a, t_stack **stack_b, char *command)
 {
 	if (ft_strncmp(command, "rra", 3) == 0)
 		rotate(stack_a, 'r');
