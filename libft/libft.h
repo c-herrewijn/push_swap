@@ -6,7 +6,7 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/19 15:14:18 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/04/27 23:08:25 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/11 13:09:33 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <stdarg.h>
 # include <stdbool.h>
 # include <limits.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
 
 typedef struct s_list
 {
@@ -85,5 +89,6 @@ void	printf_putunsignedhex_fd(unsigned long long nbr,
 			int *print_len, char var_case, int fd);
 size_t	ft_max(size_t i, size_t j);
 size_t	ft_min(size_t i, size_t j);
+char	*get_next_line(int fd);
 
 #endif
