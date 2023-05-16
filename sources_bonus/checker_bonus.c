@@ -6,11 +6,21 @@
 /*   By: cherrewi <cherrewi@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/10 15:10:11 by cherrewi      #+#    #+#                 */
-/*   Updated: 2023/05/11 17:42:42 by cherrewi      ########   odam.nl         */
+/*   Updated: 2023/05/11 20:37:08 by cherrewi      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
+
+static void	free_and_exit_with_error(char *command, t_stack *stack_a,
+	t_stack *stack_b)
+{
+	free(command);
+	write(STDERR_FILENO, "Error\n", 6);
+	free_nodes_in_stack(stack_a);
+	free_nodes_in_stack(stack_b);
+	exit(1);
+}
 
 // strips a single final newline of a string (replaces with a NULL character)
 static char	*strip_newline(char *str)
@@ -38,6 +48,7 @@ static void	silent_execute_command(t_data *data, char *command)
 		execute_swap(stack_a, stack_b, command);
 	if (ft_strncmp(command, "r", 1) == 0)
 		execute_rotate(stack_a, stack_b, command);
+	free(command);
 }
 
 static bool	command_valid(char *command)
@@ -83,7 +94,7 @@ int	main(int argc, char *argv[])
 		if (command_valid(command))
 			silent_execute_command(&data, command);
 		else
-			exit_with_error(data.stack_a, data.stack_b);
+			free_and_exit_with_error(command, data.stack_a, data.stack_b);
 	}
 	if (stack_is_ordered(data.stack_a) && data.stack_b == NULL)
 		write(STDOUT_FILENO, "OK\n", 3);
